@@ -136,9 +136,9 @@ unzip master.zip
 cd viridis-master
 /usr/local/bin/anaconda/bin/python setup.py install
 
-# Rhoana
-# Original hoana package (not needed, because we wrapped it)
-# Also need mahotas, pymaxflow, fast64counter, cplex
+\# Rhoana
+\# Original hoana package (not needed, because we wrapped it)
+\# Also need mahotas, pymaxflow, fast64counter, cplex
 
 # Mahotas
 wget https://pypi.python.org/packages/source/m/mahotas/mahotas-1.2.4.tar.gz
