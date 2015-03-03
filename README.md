@@ -65,83 +65,82 @@ Outstanding TODOs:
 - Deep learning not integrated
 - Matlab compiler setup
 
-## ----------------------------
-## GENERAL INSTALLATION INSTRUCTIONS
-## ----------------------------
+### ----------------------------
+### GENERAL INSTALLATION INSTRUCTIONS
+### ----------------------------
 
 Configure a basic Centos installation, along with a non-root user account (sudo privileges)
 
 Configure and install MATLAB (this is a required dependency - your install process will vary)
 
 Get OCP Matlab 
-  
+```  
   wget https://github.com/openconnectome/ocpMatlab/archive/master.zip
-  
-  Unzip to: /mnt/pipeline/tools/CAJAL3D
+```  
+Unzip to: /mnt/pipeline/tools/CAJAL3D
 
 Update all packages:
-
+```
   sudo yum -y update  
-
-## ---------------------------------
-## ALGORITHM INSTALLATION INSTRUCTIONS
-## ---------------------------------
+```
+### ---------------------------------
+### ALGORITHM INSTALLATION INSTRUCTIONS
+### ---------------------------------
 
 
 Download and Install LONI (Client) into home directory
-
+```
   http://www.loni.usc.edu/Software/Pipeline
-  
+```  
   TODO:  Add code to unzip and move
 
 Download CC Boost
-
+```
   cd /mnt/pipeline/tools/CAJAL3D/external/
  
   wget https://documents.epfl.ch/groups/c/cv/cvlab-unit/www/data/synapses/ccboost-precompiled-v0.2.tar bz2
 
   tar -xvf ccboost-precompiled-v0.2.tar
-
+```
 Download VL Feat
-
+```
   wget http://www.vlfeat.org/download/vlfeat-0.9.20-bin.tar.gz
 
   tar -xvf vlfeat-0.9.20-bin.tar.gz
 
   rm vlfeat-0.9.20-bin.tar.gz
-  
+```  
   TODO:  Need to run('VLFEATROOT/toolbox/vl_setup')
 
 Download Ilastik
-
+```
   wget http://files.ilastik.org/ilastik-1.1.5-Linux.tar.gz
 
   tar -xvf ilastik-1.1.5-Linux.tar.gz
   
   rm ilastik-1.1.5-Linux.tar.gz
-
+```
 Install Anaconda
-
+```
   wget http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-2.1.0-Linux-x86_64.sh
 
   bash Anaconda-2.1.0-Linux-x86_64.sh
-
+```
   TODO:  at prompt accept license
-  
   TODO:  at prompt install in: /usr/bin/local/anaconda 
 
 export path in ~/.bashrc file
-  
+```  
   export PATH="/usr/local/bin/anaconda/bin:$PATH"
-
+```
 Gala
   
   When using anaconda, just need the gala package itself
-
+```
   wget https://github.com/janelia-flyem/gala/archive/master.zip
-
-  Install manually to link to anaconda
-
+```
+Install manually to link to anaconda
+```
   unzip master.zip
   
   mv gala-master /mnt/pipeline/tools/CAJAL3D/external/gala
@@ -149,9 +148,9 @@ Gala
   cd /mnt/pipeline/tools/CAJAL3D/external/gala
   
   python /usr/local/bin/anaconda/bin/python/setup.py install 
-
+```
 Download Viridis
-
+```
   wget https://github.com/jni/viridis/archive/master.zip
 
   unzip master.zip
@@ -159,13 +158,14 @@ Download Viridis
   cd viridis-master
   
   /usr/local/bin/anaconda/bin/python setup.py install
-
+```
 Rhoana
 
 Original Rhoana package (not needed, because we wrapped it)
 Also need mahotas, pymaxflow, fast64counter, cplex
 
 Mahotas
+```
   wget https://pypi.python.org/packages/source/m/mahotas/mahotas-1.2.4.tar.gz  
 
   tar -xvf mahotas-1.2.4.tar.gz  
@@ -173,9 +173,9 @@ Mahotas
   cd mahotas-1.2.4.tar.gz  
 
   sudo /usr/local/bin/anaconda/bin/python setup.py install  
-
+```
 Download pymaxflow from github.com/Rhoana/pymaxflow
-
+```
   wget https://github.com/Rhoana/pymaxflow/archive/master.zip
 
   unzip master.zip #make sure we cleanup each time
@@ -185,10 +185,10 @@ Download pymaxflow from github.com/Rhoana/pymaxflow
   sudo /usr/local/bin/anaconda/bin/python setup.py install
 
   rm ~/Downloads/master.zip  #make sure we download to this location
-
+```
 
 Download fast64counter from github.com/Rhoana/fast64counter
-
+```
   wget https://github.com/Rhoana/fast64counter/archive/master.zip
 
   unzip master.zip #make sure we cleanup each time
@@ -198,22 +198,23 @@ Download fast64counter from github.com/Rhoana/fast64counter
   sudo /usr/local/bin/anaconda/bin/python setup.py install
 
   rm ~/Downloads/master.zip
-
+```
 Download cplex bin file
-
+```
   TODO - for now hosted privately - or get from IBM site
   
   sudo sh cplex_studio126.linux-x86-64.bin
   (interactive prompts - need to configure for non-interactive mode)
-
+```
 Python bindings:
-
+```
   cd /opt/ibm/ILOG/CPLEX_Studio126/cplex/python/x86-64_linux
   
   sudo python setup.py install
-
+```
 Clone repo
-  
+  ```
   cd /mnt/pipeline/tools/CAJAL3D/
 
   git clone https://github.com/openconnectome/i2g.git
+  ```
