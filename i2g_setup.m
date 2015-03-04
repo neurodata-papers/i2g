@@ -1,7 +1,7 @@
 % Setup script for I2G "toolbox"
 % This should be run during each matlab session 
 
-cd('/mnt/pipeline/tools/CAJAL3d')
+cd('/mnt/pipeline/tools/CAJAL3D/i2g')
 addpath(pwd) %top level directory
 addpath('./data')
 addpath(genpath('./packages'))
