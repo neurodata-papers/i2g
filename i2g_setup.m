@@ -3,8 +3,8 @@
 
 cd('/mnt/pipeline/tools/CAJAL3D/i2g')
 addpath(pwd) %top level directory
-addpath('./data')
-addpath(genpath('./packages'))
+addpath('data')
+addpath(genpath('packages'))
 addpath('test')
 addpath(genpath('external/tools'))
 
