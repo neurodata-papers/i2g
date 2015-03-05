@@ -7,9 +7,9 @@
                 <metadata>
                         <data key="__creationDateKey" value="Thu Dec 20 11:43:30 EST 2012" />
                 </metadata>
-                <module id="GraphReportGenerator_1" name="Graph Report Generator" package="CAJAL3D" version="1.0" description="This module takes in a collection of graph data files from Graph Job Collector and outputs a report." icon="0" posX="135" posY="101" sourceCode="" location="pipeline://neuron.jhuapl.edu/packages/graph_report_gen/report_gen.py" executableVersion="1.0">
+                <module id="GraphReportGenerator_1" name="Graph Report Generator" package="I2G" version="1.0" description="This module takes in a collection of graph data files from Graph Job Collector and outputs a report." icon="0" posX="135" posY="101" sourceCode="" location="pipeline://neuron.jhuapl.edu/packages/graph_report_gen/report_gen.py" executableVersion="1.0">
                         <authors>
-                                <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
+                                <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
                         <tag>graph</tag>
                         <tag>report</tag>

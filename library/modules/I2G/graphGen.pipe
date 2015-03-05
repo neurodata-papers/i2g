@@ -7,10 +7,9 @@
                 <metadata>
                         <data key="__creationDateKey" value="" />
                 </metadata>
-                <module id="GraphGeneration_1" name="Graph Generation" package="CAJAL3D" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="0" posX="287" posY="266" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/CAJAL3D/packages/graph_gen/graph_gen.py" executableVersion="1.0" gridVariables="-l virtual_free=6G">
+                <module id="GraphGeneration_1" name="Graph Generation" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="0" posX="287" posY="266" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/graph_gen.py" executableVersion="1.0" gridVariables="-l virtual_free=6G">
                         <authors>
-                                <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
-                        </authors>
+                                <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         <tag>volume</tag>
                         <tag>RAMONVolume</tag>
                         <tag>cube</tag>

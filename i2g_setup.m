@@ -1,11 +1,11 @@
 % Setup script for I2G "toolbox"
 % This should be run during each matlab session 
 
-cd('/mnt/pipeline/tools/CAJAL3D/i2g')
-addpath(pwd) %top level directory
-addpath('data')
-addpath(genpath('packages'))
-addpath('test')
-addpath(genpath('external/tools'))
+i2gDir = '/mnt/pipeline/tools/CAJAL3D/i2g';
 
-run('external/vlfeat/toolbox/vl_setup')
+addpath(i2gDir) %top level directory
+addpath([i2gDir, filesep, 'data'])
+addpath(genpath([i2gDir, filesep, 'packages']))
+addpath([i2gDir,'test'])
+addpath(genpath([i2gDir,filesep,'external', filesep, 'tools']))
+run(['external', filesep, 'vlfeat', filesep, 'toolbox', filesep, 'vl_setup'])
