@@ -3,7 +3,7 @@ function segmentWatershedWrapper(emCube,annoToken, dilXY, dilZ, thresh,useSemaph
 % database upload to the detector
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% © [2014] The Johns Hopkins University / Applied Physics Laboratory All Rights Reserved. Contact the JHU/APL Office of Technology Transfer for any additional rights.  www.jhuapl.edu/ott
+% (c) [2014] The Johns Hopkins University / Applied Physics Laboratory All Rights Reserved. Contact the JHU/APL Office of Technology Transfer for any additional rights.  www.jhuapl.edu/ott
 % 
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
@@ -47,13 +47,11 @@ else
     ocp.setErrorPageLocation(errorPageLocation);
 end
 
-%The following two lines change each time
-%annoToken = 'segments_cshl1'; %Hard Override %WTODO
-ocp.setAnnoToken(annoToken);
-
 if exist('serviceLocation','var')
     ocp.setServerLocation(serviceLocation);
 end
+
+ocp.setAnnoToken(annoToken);
 
 if isempty(segCuboid) || isempty(segCuboid.data)
     fprintf('No Segments Detected\n');

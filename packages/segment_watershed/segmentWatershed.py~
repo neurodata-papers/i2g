@@ -39,16 +39,16 @@ del params[0]
 
 imgToken = params[0:2]
 imgServer = params[2:4]
-annoToken = params[4:6]
-annoServer = params[6:8]
-queryFile = params[8:10]
-useSemaphore = params[10:12]
-dilXY = params[12:14]
-dilZ = params[14:16]
-thresh = params[16:18]
-emCube = params[18:20]
-tokenFile = params[20:22]
-labelOut = params[22:24]
+annoToken = params[2:4]
+queryFile = params[4:6]
+useSemaphore = params[6:8]
+serviceLocation = params[8:10]
+dilXY = params[10:12]
+dilZ = params[12:14]
+thresh = params[14:16]
+emCube = params[16:18]
+tokenFile = params[18:20]
+labelOut = params[20:22]
 
 print labelOut
 # get root directory of framework
@@ -60,7 +60,7 @@ if frameworkRoot is None:
 wrapper = os.path.join(frameworkRoot, 'api', 'matlab','wrapper','basicWrapper.py')
 
 # Build call to EM Cube Cutout
-args = [wrapper] + ["packages/cubeCutout/cubeCutout.m"] + imgToken + queryFile + emCube + useSemaphore + ["-d", "0"] + imgServer + ["-b", "0"]
+args = [wrapper] + ["packages/cubeCutout/cubeCutout.m"] + imgToken + queryFile + emCube + useSemaphore + ["-d", "0"] + serviceLocation + ["-b", "0"]
 print args
 # Call Cube Cutout
 process = Popen(args, stdout=PIPE, stderr=PIPE)
@@ -86,7 +86,7 @@ if exit_code != 0:
 #emCube,dbToken, dilXY, dilZ, thresh,useSemaphore, errorPageLocation, serviceLocation, varargin
 
 # Build call to Segment Watershed
-args = [wrapper] + ["packages/segmentWatershed/segmentWatershedWrapper.m"] + emCube + annoToken + dilXY + dilZ +  thresh + useSemaphore + ["-s", "/mnt/pipeline/errorPages"] + annoServer + labelOut + tokenFile #+ ["-b", "0"]
+args = [wrapper] + ["packages/segmentWatershed/segmentWatershedWrapper.m"] + emCube + annoToken + dilXY + dilZ +  thresh + useSemaphore + ["-s", "/mnt/pipeline/errorPages"] + serviceLocation + labelOut + tokenFile #+ ["-b", "0"]
 print 'made it'
 print args
 
