@@ -6,6 +6,7 @@ i2gDir = '/mnt/pipeline/tools/i2g';
 addpath(i2gDir) %top level directory
 addpath([i2gDir, filesep, 'data'])
 addpath(genpath([i2gDir, filesep, 'packages']))
-addpath([i2gDir,'test'])
+addpath([i2gDir,filesels
+    p,'test'])
 addpath(genpath([i2gDir,filesep,'external', filesep, 'tools']))
 run(['external', filesep, 'vlfeat', filesep, 'toolbox', filesep, 'vl_setup'])
