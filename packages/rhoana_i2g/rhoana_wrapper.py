@@ -82,15 +82,20 @@ print labelMat
 
 
 # get root directory of framework
-frameworkRoot = os.getenv("CAJAL3D_LOCATION")
-if frameworkRoot is None:
+frameworkRootCAJAL3D = os.getenv("CAJAL3D_LOCATION")
+if frameworkRootCAJAL3D is None:
     raise Exception('You must set the CAJAL3D_LOCATION environment variable so the wrapper knows where the framework is!')
 
+
+frameworkRootI2G = os.getenv("I2G_LOCATION")
+if frameworkRootI2G is None:
+    raise Exception('You must set the I2G_LOCATION environment variable so the wrapper knows where the framework is!')
+
 # Gen path of matlab wrapper
-wrapper = os.path.join(frameworkRoot, 'api', 'matlab','wrapper','basicWrapper.py')
+wrapper = os.path.join(frameworkRootCAJAL3D, 'api', 'matlab','wrapper','basicWrapper.py')
 
 # Build call to Rhoana Data Pull
-args = [wrapper] + ["packages/rhoanaAPL/rhoana_get_data.m"] + emToken + emServiceLocation + membraneToken + membraneServiceLocation + queryFile + emCube + emMat + membraneMat + dilateXY + dilateZ + useSemaphore #+ ["-b", "0"]
+args = [wrapper] + [frameworkRootI2G, "packages/rhoanaAPL/rhoana_get_data.m"] + emToken + emServiceLocation + membraneToken + membraneServiceLocation + queryFile + emCube + emMat + membraneMat + dilateXY + dilateZ + useSemaphore #+ ["-b", "0"]
 print args
 # Call Cube Cutout
 process = Popen(args, stdout=PIPE, stderr=PIPE)
@@ -116,7 +121,7 @@ if exit_code != 0:
 
 print 'calling rhoana'
 # Build call to Rhoana
-rhoana = os.path.join(frameworkRoot, 'packages', 'rhoanaAPL','rhoana_driver_apl.py')
+rhoana = os.path.join(frameworkRootI2G, 'packages', 'rhoanaAPL','rhoana_driver_apl.py')
 args = ['/usr/bin/python2.7'] + [rhoana] + [emMat[1]] + [membraneMat[1]] + [annoMat[1]] + [comp[1]] + [nseg[1]] + [minSize1[1]] + [minSize2[1]]
 
 print args
@@ -136,7 +141,7 @@ if exit_code2 != 0:
 
 
  # Build call to Rhoana Result Push
-args = [wrapper] + ["packages/rhoanaAPL/rhoana_put_anno.m"] + emToken + annoToken + annoServiceLocation + annoMat + emCube + author + queryFile + padX + padY + useSemaphore + labelMat + tokenMat + ["-b", "0"]
+args = [wrapper] + [frameworkRootI2G, "packages/rhoanaAPL/rhoana_put_anno.m"] + emToken + annoToken + annoServiceLocation + annoMat + emCube + author + queryFile + padX + padY + useSemaphore + labelMat + tokenMat + ["-b", "0"]
 print args
 # Call Cube Cutout
 process = Popen(args, stdout=PIPE, stderr=PIPE)
