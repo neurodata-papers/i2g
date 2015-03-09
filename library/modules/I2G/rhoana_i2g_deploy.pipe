@@ -21,6 +21,7 @@
                                 <format type="File" cardinality="1">
                                         <fileTypes>
                                                 <filetype name="mat-file" extension="mat" description="MATLAB data file" />
+                                                <filetype name="list" extension="list" description="LONI pipeline list file" />
                                         </fileTypes>
                                 </format>
                         </output>
@@ -143,7 +144,7 @@
                         <output id="RhoanaI2GDeploy_1.FlowControl" name="Flow Control" required="false" enabled="true" order="24">
                                 <format type="Flow Control" cardinality="1" />
                         </output>
-                        <input id="RhoanaI2GDeploy_1.FlowIn" name="Flow In" required="false" enabled="true" order="18">
+                        <input id="RhoanaI2GDeploy_1.FlowIn" name="Flow In" required="false" enabled="false" order="18">
                                 <format type="Flow Control" cardinality="1" />
                         </input>
                         <output id="RhoanaI2GDeploy_1.LabelMatrix" name="Label Matrix" description="This is the filename where the label data will be saved as a Matix saved as a .mat file" required="false" enabled="true" order="23" prefix="-s" prefixSpaced="true" prefixAllArgs="false">
@@ -188,8 +189,8 @@
                         <variable name="img_token">kasthuri11cc</variable>
                         <variable name="node_truth_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="rhoana_cutout">rhoana_cutout.mat</variable>
-                        <variable name="syn_prob_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="membrane_server">braingraph1dev.cs.jhu.edu</variable>
+                        <variable name="syn_prob_server">braingraph1dev.cs.jhu.edu</variable>
                 </variables>
         </moduleGroup>
 </pipeline>
