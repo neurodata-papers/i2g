@@ -95,8 +95,7 @@ if frameworkRootI2G is None:
 wrapper = os.path.join(frameworkRootCAJAL3D, 'api', 'matlab','wrapper','basicWrapper.py')
 
 # Build call to Rhoana Data Pull
-#[wrapper]
-args = [os.path.join(frameworkRootI2G, 'packages', 'rhoana_i2g', 'rhoana_get_data.m')] + emToken + emServiceLocation + membraneToken + membraneServiceLocation + queryFile + emCube + emMat + membraneMat + dilateXY + dilateZ + useSemaphore #+ ["-b", "0"]
+args = [wrapper] + [os.path.join(frameworkRootI2G, 'packages', 'rhoana_i2g', 'rhoana_get_data.m')] + emToken + emServiceLocation + membraneToken + membraneServiceLocation + queryFile + emCube + emMat + membraneMat + dilateXY + dilateZ + useSemaphore #+ ["-b", "0"]
 print args
 # Call Cube Cutout
 process = Popen(args, stdout=PIPE, stderr=PIPE)
@@ -142,8 +141,7 @@ if exit_code2 != 0:
 
 
  # Build call to Rhoana Result Push
- #[wrapper] + 
-args = [os.path.join(frameworkRootI2G, 'packages', 'rhoana_i2g', 'rhoana_put_anno.m')] + emToken + annoToken + annoServiceLocation + annoMat + emCube + author + queryFile + padX + padY + useSemaphore + labelMat + tokenMat + ["-b", "0"]
+args = [wrapper] + [os.path.join(frameworkRootI2G, 'packages', 'rhoana_i2g', 'rhoana_put_anno.m')] + emToken + annoToken + annoServiceLocation + annoMat + emCube + author + queryFile + padX + padY + useSemaphore + labelMat + tokenMat + ["-b", "0"]
 print args
 # Call Cube Cutout
 process = Popen(args, stdout=PIPE, stderr=PIPE)
