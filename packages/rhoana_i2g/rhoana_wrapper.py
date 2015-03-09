@@ -95,7 +95,8 @@ if frameworkRootI2G is None:
 wrapper = os.path.join(frameworkRootCAJAL3D, 'api', 'matlab','wrapper','basicWrapper.py')
 
 # Build call to Rhoana Data Pull
-args = [wrapper] + [os.path.join(frameworkRootI2G, 'packages', 'rhoana_i2g', 'rhoana_get_data.m')] + emToken + emServiceLocation + membraneToken + membraneServiceLocation + queryFile + emCube + emMat + membraneMat + dilateXY + dilateZ + useSemaphore #+ ["-b", "0"]
+#[wrapper]
+args = [os.path.join(frameworkRootI2G, 'packages', 'rhoana_i2g', 'rhoana_get_data.m')] + emToken + emServiceLocation + membraneToken + membraneServiceLocation + queryFile + emCube + emMat + membraneMat + dilateXY + dilateZ + useSemaphore #+ ["-b", "0"]
 print args
 # Call Cube Cutout
 process = Popen(args, stdout=PIPE, stderr=PIPE)
