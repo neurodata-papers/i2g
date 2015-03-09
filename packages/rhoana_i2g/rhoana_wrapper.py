@@ -142,7 +142,8 @@ if exit_code2 != 0:
 
 
  # Build call to Rhoana Result Push
-args = [wrapper] + [os.path.join(frameworkRootI2G, 'packages', 'rhoana_i2g', 'rhoana_put_anno.m')] + emToken + annoToken + annoServiceLocation + annoMat + emCube + author + queryFile + padX + padY + useSemaphore + labelMat + tokenMat + ["-b", "0"]
+ #[wrapper] + 
+args = [os.path.join(frameworkRootI2G, 'packages', 'rhoana_i2g', 'rhoana_put_anno.m')] + emToken + annoToken + annoServiceLocation + annoMat + emCube + author + queryFile + padX + padY + useSemaphore + labelMat + tokenMat + ["-b", "0"]
 print args
 # Call Cube Cutout
 process = Popen(args, stdout=PIPE, stderr=PIPE)
