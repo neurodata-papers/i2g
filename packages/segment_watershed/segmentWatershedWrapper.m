@@ -227,6 +227,8 @@ else
     toc
 end
 
+print labelOutFile
+print tokenFile
 %Save out matrix
 %if ~isempty(varargin)
 %    labelOutFile = varargin{1};

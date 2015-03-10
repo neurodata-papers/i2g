@@ -51,6 +51,7 @@ tokenFile = params[20:22]
 labelOut = params[22:24]
 
 print labelOut
+print tokenFile
 
 # get root directory of framework
 frameworkRootCAJAL3D = os.getenv("CAJAL3D_LOCATION")
