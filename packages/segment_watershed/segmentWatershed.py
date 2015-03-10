@@ -91,7 +91,7 @@ if exit_code != 0:
 #emCube,dbToken, dilXY, dilZ, thresh,useSemaphore, errorPageLocation, serviceLocation, varargin
 
 # Build call to Segment Watershed
-args = [wrapper] + [os.path.join(frameworkRootI2G, 'packages', 'segmentWatershed', 'segmentWatershedWrapper.m')] + emCube + annoToken + dilXY + dilZ +  thresh + useSemaphore + ["-s", "/mnt/pipeline/errorPages"] + annoServer + labelOut + tokenFile #+ ["-b", "0"]
+args = [wrapper] + [os.path.join(frameworkRootI2G, 'packages', 'segment_watershed', 'segmentWatershedWrapper.m')] + emCube + annoToken + dilXY + dilZ +  thresh + useSemaphore + ["-s", "/mnt/pipeline/errorPages"] + annoServer + labelOut + tokenFile #+ ["-b", "0"]
 print 'made it'
 print args
 
