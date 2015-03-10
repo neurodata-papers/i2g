@@ -51,13 +51,18 @@ tokenFile = params[20:22]
 labelOut = params[22:24]
 
 print labelOut
+
 # get root directory of framework
-frameworkRoot = os.getenv("CAJAL3D_LOCATION")
-if frameworkRoot is None:
+frameworkRootCAJAL3D = os.getenv("CAJAL3D_LOCATION")
+if frameworkRootCAJAL3D is None:
     raise Exception('You must set the CAJAL3D_LOCATION environment variable so the wrapper knows where the framework is!')
 
+frameworkRootI2G = os.getenv("I2G_LOCATION")
+if frameworkRootI2G is None:
+    raise Exception('You must set the I2G_LOCATION environment variable so the wrapper knows where the framework is!')
+
 # Gen path of matlab wrapper
-wrapper = os.path.join(frameworkRoot, 'api', 'matlab','wrapper','basicWrapper.py')
+wrapper = os.path.join(frameworkRootCAJAL3D, 'api', 'matlab','wrapper','basicWrapper.py')
 
 # Build call to EM Cube Cutout
 args = [wrapper] + ["packages/cubeCutout/cubeCutout.m"] + imgToken + queryFile + emCube + useSemaphore + ["-d", "0"] + imgServer + ["-b", "0"]
@@ -86,7 +91,7 @@ if exit_code != 0:
 #emCube,dbToken, dilXY, dilZ, thresh,useSemaphore, errorPageLocation, serviceLocation, varargin
 
 # Build call to Segment Watershed
-args = [wrapper] + ["packages/segmentWatershed/segmentWatershedWrapper.m"] + emCube + annoToken + dilXY + dilZ +  thresh + useSemaphore + ["-s", "/mnt/pipeline/errorPages"] + annoServer + labelOut + tokenFile #+ ["-b", "0"]
+args = [wrapper] + [os.path.join(frameworkRootI2G, 'packages', 'segmentWatershed', 'segmentWatershedWrapper.m'] + emCube + annoToken + dilXY + dilZ +  thresh + useSemaphore + ["-s", "/mnt/pipeline/errorPages"] + annoServer + labelOut + tokenFile #+ ["-b", "0"]
 print 'made it'
 print args
 
