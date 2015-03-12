@@ -3,6 +3,8 @@
         <connections>
                 <connection source="ResetSemaphore_1.OutFlowControl" sink="DistributedSemaphore_1.InFlowControl" />
                 <connection source="SynapseAlignandError_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
+                <connection source="RhoanaI2GEvaluate_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
+                <connection source="SegmentWatershedEvaluate_1.flow" sink="DistributedSemaphore_2.InFlowControl" />
                 <connection source="ResetSemaphore_1.OutFlowControl" sink="CubeCutout_1.flowin" />
                 <connection source="ResetSemaphore_1.OutFlowControl" sink="CubeCutout_2.flowin" />
                 <connection source="GraphReportGenerator_1.HTMLZipFile" sink="AnalysisReport_1.Input" />
@@ -134,7 +136,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="DistributedSemaphore_2" name="Distributed Semaphore" package="CAJAL3D" version="1.0" description="This module manipulates the distributed semaphore for large scale OCP processing.&#xA;&#xA;You can temporarily change the number of read or write permits, or reset back to server defaults." icon="0" posX="582" posY="712" rotation="1" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/CAJAL3D/api/matlab/wrapper/basicWrapper.py" executableVersion="1.0">
+                <module id="DistributedSemaphore_2" name="Distributed Semaphore" package="CAJAL3D" version="1.0" description="This module manipulates the distributed semaphore for large scale OCP processing.&#xA;&#xA;You can temporarily change the number of read or write permits, or reset back to server defaults." icon="0" posX="717" posY="778" rotation="1" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/CAJAL3D/api/matlab/wrapper/basicWrapper.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -643,7 +645,7 @@
                         <input id="SegmentWatershedEvaluate_1.annotationserver" name="annotation server" description="database token of the annotation database that results should be written two.  Typically set via workflow variable." required="false" enabled="true" order="4" prefix="-s" prefixSpaced="true" prefixAllArgs="false">
                                 <format type="String" cardinality="1" />
                                 <values>
-                                        <value>pipeline://neuron.jhuapl.edu/{project_dir}/input/watershed_token_params.list</value>
+                                        <value>{rhoana_anno_server}</value>
                                 </values>
                         </input>
                         <executableAuthors>
@@ -1240,7 +1242,7 @@
                                 <value>pipeline://neuron.jhuapl.edu/{project_dir}/input/token_syn.mat</value>
                         </values>
                 </dataModule>
-                <module id="GraphJobEnumerator_1" name="Graph Job Enumerator" package="I2G" version="1.0" description="This module takes in lists of tokens and parameters and generates batches of graph evaluations for pipeline parameter sweeping. " icon="1" posX="1193" posY="787" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/CAJAL3D/api/matlab/wrapper/basicWrapper.py" executableVersion="1.0">
+                <module id="GraphJobEnumerator_1" name="Graph Job Enumerator" package="I2G" version="1.0" description="This module takes in lists of tokens and parameters and generates batches of graph evaluations for pipeline parameter sweeping. " icon="1" posX="1151" posY="909" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/utilities/basicWrapperI2G.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
