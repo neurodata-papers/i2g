@@ -178,15 +178,19 @@ else
     toc
     
     % relabel Paint
-    tic
-    labelOut = zeros(size(labels));
-    old_ids = unique(labels);
-    old_ids(old_ids == 0) = [];
-    for ii = 1:length(old_ids)
-        labelOut(labels == old_ids(ii)) = ids(ii);
-    end
-    fprintf('Relabling: ');
-    toc
+fprintf('Relabling: ');
+[zz, n] = relabel_id(segCuboid.data);
+
+tic
+labelOut = zeros(size(zz));
+ 
+rp = regionprops(zz,'PixelIdxList');
+for ii = 1:length(rp)
+    labelOut(rp(ii).PixelIdxList) = ids(ii);
+end
+ 
+clear zz
+t(2) = toc
     
 end
 

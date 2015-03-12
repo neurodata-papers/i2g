@@ -3,10 +3,10 @@
         <connections>
                 <connection source="ResetSemaphore_1.OutFlowControl" sink="DistributedSemaphore_1.InFlowControl" />
                 <connection source="SynapseAlignandError_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
-                <connection source="RhoanaI2GEvaluate_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
                 <connection source="SegmentWatershedEvaluate_1.flow" sink="DistributedSemaphore_2.InFlowControl" />
-                <connection source="ResetSemaphore_1.OutFlowControl" sink="CubeCutout_1.flowin" />
-                <connection source="ResetSemaphore_1.OutFlowControl" sink="CubeCutout_2.flowin" />
+                <connection source="RhoanaI2GEvaluate_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
+                <connection source="DistributedSemaphore_1.OutFlowControl" sink="CubeCutout_1.flowin" />
+                <connection source="DistributedSemaphore_1.OutFlowControl" sink="CubeCutout_2.flowin" />
                 <connection source="GraphReportGenerator_1.HTMLZipFile" sink="AnalysisReport_1.Input" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="RhoanaI2GEvaluate_1.FlowIn" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="SegmentWatershedEvaluate_1.FlowIn" />
@@ -18,7 +18,7 @@
                 <connection source="CubeCutout_2.outputFile" sink="BuildGraphVolume_1.synTruthVolume" />
                 <connection source="BuildGraphVolume_1.edgeList" sink="GraphError_1.edgeListTest" />
                 <connection source="BuildGraph_1.edgeList" sink="GraphError_1.edgeListTruth" />
-                <connection source="ResetSemaphore_1.OutFlowControl" sink="BuildGraph_1.flowin" />
+                <connection source="DistributedSemaphore_1.OutFlowControl" sink="BuildGraph_1.flowin" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="SynapseObjectificationEvaluate_1.FlowIn" />
                 <connection source="CubeCutout_2.outputFile" sink="SynapseAlignandError_1.synTruthVolume" />
                 <connection source="SynapseObjectificationEvaluate_1.synToken" sink="SynapseAlignandError_1.synTestToken" />
@@ -31,10 +31,10 @@
                 <connection source="NodeEdgeDataFiles_1.Output" sink="GraphJobEnumerator_1.TokenstoEvaluate" />
                 <connection source="DistributedSemaphore_2.OutFlowControl" sink="GraphJobEnumerator_1.FlowControl" />
                 <connection source="CubeCutout_1.outputFile" sink="SegmentError_1.TruthVolume" />
-                <connection source="RhoanaI2GEvaluate_1.LabelMatrix" sink="SegmentError_1.TestVolume" />
                 <connection source="SegmentWatershedEvaluate_1.labeloutput" sink="SegmentError_1.TestVolume" />
-                <connection source="RhoanaI2GEvaluate_1.SegmentationToken" sink="SegmentError_1.SegToken" />
+                <connection source="RhoanaI2GEvaluate_1.LabelMatrix" sink="SegmentError_1.TestVolume" />
                 <connection source="SegmentWatershedEvaluate_1.token" sink="SegmentError_1.SegToken" />
+                <connection source="RhoanaI2GEvaluate_1.SegmentationToken" sink="SegmentError_1.SegToken" />
                 <connection source="SynapseObjectificationEvaluate_1.synToken" sink="CubeCutout_3.token" />
                 <connection source="SynapseObjectificationEvaluate_1.synServer" sink="CubeCutout_3.ServiceLocation" />
         </connections>
@@ -93,7 +93,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="DistributedSemaphore_1" name="Distributed Semaphore" package="CAJAL3D" version="1.0" description="This module manipulates the distributed semaphore for large scale OCP processing.&#xA;&#xA;You can temporarily change the number of read or write permits, or reset back to server defaults." icon="0" posX="995" posY="138" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/CAJAL3D/api/matlab/wrapper/basicWrapper.py" executableVersion="1.0">
+                <module id="DistributedSemaphore_1" name="Distributed Semaphore" package="CAJAL3D" version="1.0" description="This module manipulates the distributed semaphore for large scale OCP processing.&#xA;&#xA;You can temporarily change the number of read or write permits, or reset back to server defaults." icon="0" posX="518" posY="74" rotation="1" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/CAJAL3D/api/matlab/wrapper/basicWrapper.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -136,7 +136,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="DistributedSemaphore_2" name="Distributed Semaphore" package="CAJAL3D" version="1.0" description="This module manipulates the distributed semaphore for large scale OCP processing.&#xA;&#xA;You can temporarily change the number of read or write permits, or reset back to server defaults." icon="0" posX="717" posY="778" rotation="1" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/CAJAL3D/api/matlab/wrapper/basicWrapper.py" executableVersion="1.0">
+                <module id="DistributedSemaphore_2" name="Distributed Semaphore" package="CAJAL3D" version="1.0" description="This module manipulates the distributed semaphore for large scale OCP processing.&#xA;&#xA;You can temporarily change the number of read or write permits, or reset back to server defaults." icon="0" posX="582" posY="712" rotation="1" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/CAJAL3D/api/matlab/wrapper/basicWrapper.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -894,7 +894,7 @@
                         <input id="BuildGraph_1.evalTokens" name="evalTokens" required="false" enabled="true" order="0" prefix="-s" prefixSpaced="true" prefixAllArgs="false">
                                 <format type="String" cardinality="1" />
                                 <values>
-                                        <value>TEST2_c3d_synObjMPMR1,http://braingraph1dev.cs.jhu.edu/,TEST2_c3d_rhoana5,http://braingraph1dev.cs.jhu.edu/</value>
+                                        <value>{edge_truth_token},{edge_truth_server},{node_truth_token},{node_truth_server}</value>
                                 </values>
                         </input>
                         <input id="BuildGraph_1.resolution" name="resolution" required="false" enabled="true" order="1" prefix="-d" prefixSpaced="true" prefixAllArgs="false">
@@ -1242,7 +1242,7 @@
                                 <value>pipeline://neuron.jhuapl.edu/{project_dir}/input/token_syn.mat</value>
                         </values>
                 </dataModule>
-                <module id="GraphJobEnumerator_1" name="Graph Job Enumerator" package="I2G" version="1.0" description="This module takes in lists of tokens and parameters and generates batches of graph evaluations for pipeline parameter sweeping. " icon="1" posX="1151" posY="909" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/utilities/basicWrapperI2G.py" executableVersion="1.0">
+                <module id="GraphJobEnumerator_1" name="Graph Job Enumerator" package="I2G" version="1.0" description="This module takes in lists of tokens and parameters and generates batches of graph evaluations for pipeline parameter sweeping. " icon="1" posX="1193" posY="787" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/utilities/basicWrapperI2G.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -1466,13 +1466,13 @@
                         <variable name="img_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="syn_anno_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="mebrane_token">cajal3d_membraneFinalPartial</variable>
-                        <variable name="img_token">kasthuri11cc</variable>
                         <variable name="rhoana_anno_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="syn_prob_token">cajal3d_synProbPartial</variable>
+                        <variable name="img_token">kasthuri11cc</variable>
                         <variable name="node_truth_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="rhoana_cutout">rhoana_cutout.mat</variable>
-                        <variable name="membrane_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="syn_prob_server">braingraph1dev.cs.jhu.edu</variable>
+                        <variable name="membrane_server">braingraph1dev.cs.jhu.edu</variable>
                 </variables>
         </moduleGroup>
 </pipeline>

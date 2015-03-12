@@ -52,6 +52,7 @@ minSize2 = int(float(minSize2))
 #TODO: HACK FOR NOW
 if nseg > 40:
     nseg = 3
+    print 'Using 3 levels only'
 
 #Control block
 segFlag = 1
@@ -59,7 +60,7 @@ cplexFlag = 1 #Must run with segFlag, currently
 debugFlag = 0
 #size_compensation_factor = 0.8
 chunksize = 128  # chunk size in the HDF5
-nseg = 10 #TODO
+#nseg = 10 #TODO
 
 # This section applies the segmentation code
 if segFlag == 1:
