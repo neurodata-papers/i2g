@@ -19,7 +19,7 @@
                         <input id="SynapseObjectificationDeploy_1.FunctionName" name="Function Name" description="This is the relative path to MATLAB function you want to execute in relation to the CAJAL3D framework root.  Once it is set it does not need to be changed.  (ex. &quot;/api/matlab/cubeGen/cubeGenCutout.m&quot;)&#xA;&#xA;The location of the CAJAL3D framework root should be set as an environment variable for the CAJAL3DMAT package.  &#xA;ex. CAJAL3D_LOCATION=/usr/pipeline/tools/CAJAL3D&quot;&#xA;&#xA;" required="true" enabled="true" order="1">
                                 <format type="String" cardinality="1" />
                                 <values>
-                                        <value>packages/contextSynDetect/contextSynDetectRAMONify.m</value>
+                                        <value>packages/context_syndetect/contextSynDetectRAMONify.m</value>
                                 </values>
                         </input>
                         <input id="SynapseObjectificationDeploy_1.DebugMode" name="Debug Mode" description="This flag controls the debug mode included in the matlabInit wrapper.&#xA;If enabled(1) a breakpoint will be placed before the function call and an editor and workspace manager will be opened.  You can then step through execution.  You must VNC into the remote machine if running on a cluster to see the windows." required="true" enabled="true" order="17" prefix="-b" prefixSpaced="true" prefixAllArgs="false">
@@ -185,8 +185,8 @@
                         <variable name="syn_prob_token" required="true">cajal3d_inscribedSynapseProb4</variable>
                         <variable name="node_truth_server" required="true">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="rhoana_cutout" description="OCPQuery specifying the region to be analyzed fror rhoana with padding&#xA;" required="true">rhoana_cutout.mat</variable>
-                        <variable name="syn_prob_server" description="URL to server containing synapse probabilities&#xA;" required="true">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="membrane_server" description="membrane server URL&#xA;" required="true">braingraph1dev.cs.jhu.edu</variable>
+                        <variable name="syn_prob_server" description="URL to server containing synapse probabilities&#xA;" required="true">braingraph1dev.cs.jhu.edu</variable>
                 </variables>
         </moduleGroup>
 </pipeline>

@@ -55,12 +55,12 @@ print nodeToken
 print nodeServer
 
 # get root directory of framework
-frameworkRoot = os.getenv("CAJAL3D_LOCATION")
+frameworkRoot = os.getenv("I2G_LOCATION")
 if frameworkRoot is None:
-    raise Exception('You must set the CAJAL3D_LOCATION environment variable so the wrapper knows where the framework is!')
+    raise Exception('You must set the I2G_LOCATION environment variable so the wrapper knows where the framework is!')
 
 # Gen path of matlab wrapper
-wrapper = os.path.join(frameworkRoot, 'api', 'matlab','wrapper','basicWrapper.py')
+wrapper = os.path.join(frameworkRoot, 'packages', 'utilities','basicWrapperI2G.py')
 
 # Build call to Graph Gen
 

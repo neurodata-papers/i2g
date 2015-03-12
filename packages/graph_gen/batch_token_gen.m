@@ -22,21 +22,9 @@ function batch_token_gen(algorithm_name, server_url,...
 %       over as pairs
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (c) [2014] The Johns Hopkins University / Applied Physics Laboratory All Rights Reserved. Contact the JHU/APL Office of Technology Transfer for any additional rights.  www.jhuapl.edu/ott
-% 
-% Licensed under the Apache License, Version 2.0 (the "License");
-% you may not use this file except in compliance with the License.
-% You may obtain a copy of the License at
-% 
-%    http://www.apache.org/licenses/LICENSE-2.0
-% 
-% Unless required by applicable law or agreed to in writing, software
-% distributed under the License is distributed on an "AS IS" BASIS,
-% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-% See the License for the specific language governing permissions and
-% limitations under the License.
+% (c) 2014 The Johns Hopkins University / Applied Physics Laboratory.  All Rights Reserved.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   
+    
     %% Param checks
     if strcmp(edge_or_node,'edge') == 0 && strcmp(edge_or_node,'node') == 0
         error('batch_token_gen:invalid_args','edge_or_node valid values: edge,node');        
@@ -61,17 +49,18 @@ function batch_token_gen(algorithm_name, server_url,...
             set_inds = [d1(:) d2(:) d3(:)];
             
         case 4
-            [d1,d2,d3,d4] = meshgrid(1:length(varargin{2}), 1:length(varargin{4}),...
+            [d1,d2,d3,d4] = ndgrid(1:length(varargin{2}), 1:length(varargin{4}),...
                 1:length(varargin{6}),1:length(varargin{8}));
             set_inds = [d1(:) d2(:) d3(:) d4(:)];
             
         case 5
-            [d1,d2,d3,d4,d5] = meshgrid(1:length(varargin{2}), 1:length(varargin{4}),...
+            %Need to use ndgrid here
+            [d1,d2,d3,d4,d5] = ndgrid(1:length(varargin{2}), 1:length(varargin{4}),...
                 1:length(varargin{6}),1:length(varargin{8}),1:length(varargin{10}));
             set_inds = [d1(:) d2(:) d3(:) d4(:) d5(:)];
             
         case 6
-            [d1,d2,d3,d4,d5,d6] = meshgrid(1:length(varargin{2}), 1:length(varargin{4}),...
+            [d1,d2,d3,d4,d5,d6] = ndgrid(1:length(varargin{2}), 1:length(varargin{4}),...
                 1:length(varargin{6}),1:length(varargin{8}),1:length(varargin{10}),...
                 1:length(varargin{12}));
             set_inds = [d1(:) d2(:) d3(:) d4(:) d5(:) d6(:)];
