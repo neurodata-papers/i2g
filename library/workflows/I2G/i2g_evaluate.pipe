@@ -791,7 +791,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="BuildGraph_1" name="Build Graph" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="2040" posY="754" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/build_graph.py" executableVersion="1.0" gridVariables="-l virtual_free=6G">
+                <module id="BuildGraph_1" name="Build Graph" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="1626" posY="912" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/build_graph.py" executableVersion="1.0" gridVariables="-l virtual_free=6G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>

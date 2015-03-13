@@ -23,7 +23,7 @@ lgTestF = matrixFull(lgTest);
 lgTruthFB = uint8(lgTruthF > 0);
 lgTestFB = uint8(lgTestF > 0);
 
-gErr.scoreFrob = norm(lgTruthFB-lgTestFB,'fro');%  sum(sum(abs(logical(lgTruth)-logical(lgTest))));
+gErr.scoreFrob = norm(single(lgTruthFB-lgTestFB),'fro');%  sum(sum(abs(logical(lgTruth)-logical(lgTest))));
 
 %mtxDiff = lgTruthFB - lgTestFB;
 
@@ -74,7 +74,7 @@ for i = 1:nIter
     ptest = zeros(size(lgTest));
     ptest(chooseIdx(1:length(nEntry))) = 1;
     ptest = matrixFull(ptest);
-    pscoreFrob(i) = norm(lgTruthFB-lgTestFB,'fro');
+    pscoreFrob(i) = norm(single(lgTruthFB-lgTestFB),'fro');
     
     TP = sum(ptest == 1 & lgTruthFB == 1);
     FP = sum(ptest == 1 & lgTruthFB == 0);
