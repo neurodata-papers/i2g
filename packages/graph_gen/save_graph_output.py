@@ -33,7 +33,7 @@ def main():
   fileout = str(fileout[0])
   
   outFile = os.path.join(result.output_dir, fileout + '.' + result.output_ext)
-  print graph_raw
+  print result.graph_raw
   print outFile
   shutil.copyfile(result.graph_raw,outFile)
   print 'Successfully copied!'  
