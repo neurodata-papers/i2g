@@ -102,9 +102,6 @@ else
     ocp.createAnnotation(paint);
     fprintf('Block Write Upload: ');
     toc
-    
-    error('Unsupported Option');
-    toc
 end
 
 %Save out matrix

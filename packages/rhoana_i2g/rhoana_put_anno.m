@@ -3,13 +3,13 @@ function rhoana_put_anno(imgToken, annoToken, annoServiceLocation, annoMat, emCu
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) [2014] The Johns Hopkins University / Applied Physics Laboratory All Rights Reserved. Contact the JHU/APL Office of Technology Transfer for any additional rights.  www.jhuapl.edu/ott
-% 
+%
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
 % You may obtain a copy of the License at
-% 
+%
 %    http://www.apache.org/licenses/LICENSE-2.0
-% 
+%
 % Unless required by applicable law or agreed to in writing, software
 % distributed under the License is distributed on an "AS IS" BASIS,
 % WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -128,11 +128,12 @@ size(labels)
 %below is original code...
 %% Upload to OCP
 % Get number of objects
-ids = unique(labels);
-ids(ids == 0) = [];
-num_objs = length(ids)
 
 if use_new_method == true
+    ids = unique(labels);
+    ids(ids == 0) = [];
+    num_objs = length(ids)
+    
     % Block reserve IDs
     ocp_ids = oo.reserve_ids(num_objs);
     [labelOut, nLabel] = relabel_id(labels);
@@ -160,12 +161,16 @@ if use_new_method == true
     fprintf('Batch Metadata Upload: ');
     toc
 else
+    % relabel Paint
+    fprintf('Relabling: ');
+    [zz, n] = relabel_id(labels);
+    
     % Old method
     % Create empty RAMON Objects
     seg = RAMONSegment();
     seg.setAuthor(author);
-    seg_cell = cell(num_objs,1);
-    for ii = 1:num_objs
+    seg_cell = cell(n,1);
+    for ii = 1:n
         s = seg.clone();
         seg_cell{ii} = s;
     end
@@ -176,21 +181,16 @@ else
     ids = oo.createAnnotation(seg_cell);
     fprintf('Batch Metadata Upload: ');
     toc
-    
-    % relabel Paint
-fprintf('Relabling: ');
-[zz, n] = relabel_id(segCuboid.data);
 
-tic
-labelOut = zeros(size(zz));
- 
-rp = regionprops(zz,'PixelIdxList');
-for ii = 1:length(rp)
-    labelOut(rp(ii).PixelIdxList) = ids(ii);
-end
- 
-clear zz
-t(2) = toc
+    labelOut = zeros(size(zz));
+    
+    rp = regionprops(zz,'PixelIdxList');
+    for ii = 1:length(rp)
+        labelOut(rp(ii).PixelIdxList) = ids(ii);
+    end
+    
+    clear zz
+    t(2) = toc
     
 end
 

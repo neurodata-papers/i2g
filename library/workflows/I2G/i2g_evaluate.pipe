@@ -357,7 +357,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <dataModule id="AnalysisReport_1" name="Analysis Report" posX="645" posY="1701" rotation="1" sourceCode="" type="File" source="false" loopIndex="false" dirDump="true">
+                <dataModule id="AnalysisReport_1" name="Analysis Report" posX="945" posY="1556" rotation="1" sourceCode="" type="File" source="false" loopIndex="false" dirDump="true">
                         <metadata>
                                 <data key="__creationDateKey" value="Mon Oct 20 16:32:17 EDT 2014" />
                         </metadata>
@@ -652,7 +652,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="GraphReportGenerator_1" name="Graph Report Generator" package="I2G" version="1.0" description="This module takes in a collection of graph data files from Graph Job Collector and outputs a report." icon="4" posX="248" posY="1629" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_report_gen/report_gen.py" executableVersion="1.0">
+                <module id="GraphReportGenerator_1" name="Graph Report Generator" package="I2G" version="1.0" description="This module takes in a collection of graph data files from Graph Job Collector and outputs a report." icon="4" posX="477" posY="1482" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_report_gen/report_gen.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -719,7 +719,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="" />
                         </executableAuthors>
                 </module>
-                <module id="ConvertEdgeList_1" name="Convert Edge List" package="I2G" version="1.0" description="This module converts and attributed edge list csv file to any other graph format supported by the OCP graph convert service.&#xA;&#xA;&quot;Input File&quot; should be a csv ending in .attredge with the format&#xA;&#xA;#column header&#xA;entry1...&#xA;entry2...&#xA;&#xA;Typically this is&#xA;#node1, node2, edge attribute, edge attribute,...&#xA;" icon="5" posX="701" posY="1276" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/convert_edge_list_format.py" executableVersion="1.0">
+                <module id="ConvertEdgeList_1" name="Convert Edge List" package="I2G" version="1.0" description="This module converts and attributed edge list csv file to any other graph format supported by the OCP graph convert service.&#xA;&#xA;&quot;Input File&quot; should be a csv ending in .attredge with the format&#xA;&#xA;#column header&#xA;entry1...&#xA;entry2...&#xA;&#xA;Typically this is&#xA;#node1, node2, edge attribute, edge attribute,...&#xA;" icon="5" posX="495" posY="1138" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/convert_edge_list_format.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -767,7 +767,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="" />
                         </executableAuthors>
                 </module>
-                <module id="BuildGraphVolume_1" name="Build Graph Volume" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="822" posY="1019" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/build_graph_volume.py" executableVersion="1.0" gridVariables="-l virtual_free=8G">
+                <module id="BuildGraphVolume_1" name="Build Graph Volume" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="820" posY="958" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/build_graph_volume.py" executableVersion="1.0" gridVariables="-l virtual_free=8G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -838,7 +838,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="GraphError_1" name="Graph Error" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="1132" posY="1314" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/metrics/graph_error.py" executableVersion="1.0" gridVariables="-l virtual_free=6G">
+                <module id="GraphError_1" name="Graph Error" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="1113" posY="1206" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/metrics/graph_error.py" executableVersion="1.0" gridVariables="-l virtual_free=6G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -1164,7 +1164,7 @@
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="willgray@jhu.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="GraphJobCollector_1" name="Graph Job Collector" package="I2G" version="1.0" description="This module takes in the output from the graph generation and evaluation process and packs all the data into a single file for use with the report generator module." icon="1" posX="705" posY="1490" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/utilities/basicWrapperI2G.py" executableVersion="1.0">
+                <module id="GraphJobCollector_1" name="Graph Job Collector" package="I2G" version="1.0" description="This module takes in the output from the graph generation and evaluation process and packs all the data into a single file for use with the report generator module." icon="1" posX="771" posY="1332" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/utilities/basicWrapperI2G.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -1471,8 +1471,8 @@
                         <variable name="img_token">kasthuri11cc</variable>
                         <variable name="node_truth_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="rhoana_cutout">rhoana_cutout.mat</variable>
-                        <variable name="syn_prob_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="membrane_server">braingraph1dev.cs.jhu.edu</variable>
+                        <variable name="syn_prob_server">braingraph1dev.cs.jhu.edu</variable>
                 </variables>
         </moduleGroup>
 </pipeline>
