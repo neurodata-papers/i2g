@@ -27,15 +27,15 @@ def main():
   parser.add_argument('graph_raw', action="store", help="The raw graph")
   result = parser.parse_args()
   
-  with open (graph_filename, "r") as myfile:
+  with open (result.graph_filename, "r") as myfile:
     fileout=myfile.readlines()
 
   fileout = str(fileout[0])
   
-  outFile = os.path.join(output_dir, fileout + '.' + output_ext)
+  outFile = os.path.join(result.output_dir, fileout + '.' + result.output_ext)
   print graph_raw
   print outFile
-  shutil.copyfile(graph_raw,outFile)
+  shutil.copyfile(result.graph_raw,outFile)
   print 'Successfully copied!'  
 
 

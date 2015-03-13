@@ -24,6 +24,9 @@ import os
 import zipfile
 import tempfile
 
+import random
+from time import sleep
+
 def main():
 
   parser = argparse.ArgumentParser(description='Upload and convert a graph from attredge to graphml,ncol,edgelist,lgl,pajek,dot,gml,leda object.')
@@ -52,6 +55,7 @@ def main():
   tmpfile.flush()
   tmpfile.seek(0)
 
+  sleep(random.random())
   try:
     req = urllib2.Request(url, tmpfile.read())
     response = urllib2.urlopen(req)
