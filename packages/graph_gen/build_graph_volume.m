@@ -24,8 +24,7 @@ edgeServer, synVolTruth, queryFile, resolution, useSemaphore, attredgeFile, edge
 edgeList = synapse_neuron_association_volume(nodeToken, nodeServer, ...
     edgeToken, edgeServer, synVolTruth, queryFile, [], resolution, 0, useSemaphore);
 
-attredge
-Writer(edgeList, attredgeFile);
+attredgeWriter(edgeList, attredgeFile);
 
 %% For saving the graph
 fid = fopen(graphFileName,'wb');
