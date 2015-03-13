@@ -18,13 +18,18 @@ import argparse
 import sys
 import os
 import shutil
+
 def main():
 
   parser = argparse.ArgumentParser(description='Save Graph')
   parser.add_argument('output_dir', action="store", help="output directory to target")
+  parser.add_argument('prefix', action="store", help="file prefix")
   parser.add_argument('graph_filename', action="store", help="The output file name")
   parser.add_argument('output_ext', action="store", help='graphml | ncol | edgelist | lgl | pajek | graphdb | numpy | mat')
   parser.add_argument('graph_raw', action="store", help="The raw graph")
+
+  parser.add_argument('attredge', action="store", help="attrEdge file")
+  parser.add_argument('gstats', action="store", help="gstat")
   result = parser.parse_args()
   
   with open (result.graph_filename, "r") as myfile:
@@ -32,10 +37,18 @@ def main():
 
   fileout = str(fileout[0])
   
-  outFile = os.path.join(result.output_dir, fileout + '.' + result.output_ext)
-  print result.graph_raw
-  print outFile
-  shutil.copyfile(result.graph_raw,outFile)
+  # Copy MROCP file 
+  outFile1 = os.path.join(result.output_dir, result.prefix + fileout + '.' + result.output_ext)
+  shutil.copyfile(result.graph_raw,outFile1)
+  
+  # Copy AttrEdge file
+  outFile2 = os.path.join(result.output_dir, result.prefix + fileout + '.attredge')  
+  shutil.copyfile(result.attredge, outFile1)
+
+  # Copy Graph Error and Graphs MAT file
+  outFile3 = os.path.join(result.output_dir, 'gstats' + result.prefix + fileout + '.mat')  
+  shutil.copyfile(result.gstats, outFile1)
+  
   print 'Successfully copied!'  
 
 

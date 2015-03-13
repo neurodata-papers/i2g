@@ -24,11 +24,12 @@ edgeServer, synVolTruth, queryFile, resolution, useSemaphore, attredgeFile, edge
 edgeList = synapse_neuron_association_volume(nodeToken, nodeServer, ...
     edgeToken, edgeServer, synVolTruth, queryFile, [], resolution, 0, useSemaphore);
 
-attredgeWriter(edgeList, attredgeFile);
+attredge
+Writer(edgeList, attredgeFile);
 
 %% For saving the graph
 fid = fopen(graphFileName,'wb');
-gName = ['i2g_testgraph_',nodeToken, '_', edgeToken];
+gName = [nodeToken, '_', edgeToken];
 fprintf(fid,gName);
 fclose(fid);
 

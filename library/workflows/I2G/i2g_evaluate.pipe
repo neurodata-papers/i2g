@@ -1386,7 +1386,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="BuildGraphVolume_1" name="Build Graph Volume" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="578" posY="930" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/build_graph_volume.py" executableVersion="1.0" gridVariables="-l virtual_free=8G">
+                <module id="BuildGraphVolume_1" name="Build Graph Volume" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="581" posY="938" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/build_graph_volume.py" executableVersion="1.0" gridVariables="-l virtual_free=8G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -1465,7 +1465,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="SaveGraphOutput_1" name="Save Graph Output" package="I2G" version="1.0" description="This module converts and attributed edge list csv file to any other graph format supported by the OCP graph convert service.&#xA;&#xA;&quot;Input File&quot; should be a csv ending in .attredge with the format&#xA;&#xA;#column header&#xA;entry1...&#xA;entry2...&#xA;&#xA;Typically this is&#xA;#node1, node2, edge attribute, edge attribute,...&#xA;" icon="5" posX="230" posY="1135" rotation="1" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/save_graph_output.py" executableVersion="1.0">
+                <module id="SaveGraphOutput_1" name="Save Graph Output" package="I2G" version="1.0" description="This module converts and attributed edge list csv file to any other graph format supported by the OCP graph convert service.&#xA;&#xA;&quot;Input File&quot; should be a csv ending in .attredge with the format&#xA;&#xA;#column header&#xA;entry1...&#xA;entry2...&#xA;&#xA;Typically this is&#xA;#node1, node2, edge attribute, edge attribute,...&#xA;" icon="5" posX="91" posY="1278" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/save_graph_output.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -1480,7 +1480,7 @@
                         <metadata>
                                 <data key="__creationDateKey" value="Fri May 11 12:38:03 EDT 2012" />
                         </metadata>
-                        <input id="SaveGraphOutput_1.OutputFormat" name="Output Format" description="Database token of the image database that em data will be cut out from. Typically set via workflow variable." required="true" enabled="true" order="2">
+                        <input id="SaveGraphOutput_1.OutputFormat" name="Output Format" description="Database token of the image database that em data will be cut out from. Typically set via workflow variable." required="true" enabled="true" order="3">
                                 <format type="Enumerated" cardinality="1">
                                         <enumeration>graphml</enumeration>
                                         <enumeration>ncol</enumeration>
@@ -1495,14 +1495,14 @@
                                         <value>graphml</value>
                                 </values>
                         </input>
-                        <input id="SaveGraphOutput_1.GraphFilename" name="Graph Filename" description="attredge file" required="true" enabled="true" order="1">
+                        <input id="SaveGraphOutput_1.GraphFilename" name="Graph Filename" description="attredge file" required="true" enabled="true" order="2">
                                 <format type="File" cardinality="1">
                                         <fileTypes>
                                                 <filetype name="txt" extension="txt" description="txt" />
                                         </fileTypes>
                                 </format>
                         </input>
-                        <input id="SaveGraphOutput_1.RawGraphFile" name="Raw Graph File" description="database token of the annotation database that contains membrane probabilities." required="true" enabled="true" order="3">
+                        <input id="SaveGraphOutput_1.RawGraphFile" name="Raw Graph File" description="database token of the annotation database that contains membrane probabilities." required="true" enabled="true" order="4">
                                 <format type="File" cardinality="1">
                                         <fileTypes>
                                                 <filetype name="File" extension="" description="Any type of data file" />
@@ -1513,6 +1513,12 @@
                                 <format type="String" cardinality="1" />
                                 <values>
                                         <value>{project_dir}/output</value>
+                                </values>
+                        </input>
+                        <input id="SaveGraphOutput_1.FilePrefix" name="File Prefix" description="Database token of the image database that em data will be cut out from. Typically set via workflow variable." required="false" enabled="true" order="1">
+                                <format type="String" cardinality="1" />
+                                <values>
+                                        <value>i2g_testgraph_</value>
                                 </values>
                         </input>
                         <executableAuthors>
