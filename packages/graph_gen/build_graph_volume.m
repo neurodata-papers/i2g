@@ -1,5 +1,5 @@
 function build_graph_volume(nodeToken, nodeServer, edgeToken, ...
-edgeServer, synVolTruth, queryFile, resolution, useSemaphore, attredgeFile, edgeListFile)
+edgeServer, synVolTruth, queryFile, resolution, useSemaphore, attredgeFile, edgeListFile, graphFileName)
 
 % build graph - this function associates neurons and synapses 
 % and builds an edge list
@@ -25,6 +25,13 @@ edgeList = synapse_neuron_association_volume(nodeToken, nodeServer, ...
     edgeToken, edgeServer, synVolTruth, queryFile, [], resolution, 0, useSemaphore);
 
 attredgeWriter(edgeList, attredgeFile);
+
+%% For saving the graph
+fid = fopen(graphFileName,'wb');
+gName = ['i2g_testgraph_',nodeToken, '_', edgeToken];
+fprintf(fid,gName);
+fclose(fid);
+
 save(edgeListFile, 'edgeList')
 
 

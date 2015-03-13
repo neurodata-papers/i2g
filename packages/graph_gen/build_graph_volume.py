@@ -43,7 +43,7 @@ resolution = params[6:8]
 useSemaphore = params[8:10]
 attEdge = params[10:12]
 edgeList = params[12:14]
-
+graphName = params[14:16]
 
 evalParam = evalToken[1].split(',')
 edgeToken = ['-s', evalParam[0]]
@@ -66,7 +66,7 @@ wrapper = os.path.join(frameworkRoot, 'packages', 'utilities','basicWrapperI2G.p
 
 # Build call to Graph Gen
 
-args = [wrapper] + ["packages/graph_gen/build_graph_volume.m"] + nodeToken + nodeServer + edgeToken + edgeServer + synTruthVol + queryFile + resolution + useSemaphore + attEdge + edgeList
+args = [wrapper] + ["packages/graph_gen/build_graph_volume.m"] + nodeToken + nodeServer + edgeToken + edgeServer + synTruthVol + queryFile + resolution + useSemaphore + attEdge + edgeList + graphName
 
 print args
 
