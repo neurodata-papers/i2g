@@ -46,7 +46,7 @@ def main():
   shutil.copyfile(result.attredge, outFile2)
 
   # Copy Graph Error and Graphs MAT file
-  outFile3 = os.path.join(result.output_dir, 'gstats' + result.prefix + fileout + '.mat')  
+  outFile3 = os.path.join(result.output_dir, 'gstats_i2g' + fileout + '.mat')  
   shutil.copyfile(result.gstats, outFile3)
   
   print 'Successfully copied!'  
