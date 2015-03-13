@@ -2,13 +2,13 @@ function synapse_align_error(synTestFile, synTruthFile, synToken, synLocation, r
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) [2014] The Johns Hopkins University / Applied Physics Laboratory All Rights Reserved. Contact the JHU/APL Office of Technology Transfer for any additional rights.  www.jhuapl.edu/ott
-% 
+%
 % Licensed under the Apache License, Version 2.0 (the "License");
 % you may not use this file except in compliance with the License.
 % You may obtain a copy of the License at
-% 
+%
 %    http://www.apache.org/licenses/LICENSE-2.0
-% 
+%
 % Unless required by applicable law or agreed to in writing, software
 % distributed under the License is distributed on an "AS IS" BASIS,
 % WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,7 @@ if useSemaphore == 1
     ocpS = OCP('semaphore');
 else
     ocpS = OCP();
-
+    
 end
 
 ocpS.setServerLocation(synLocation);
@@ -59,8 +59,18 @@ TP = 0; FP = 0; FN = 0; TP2 = 0;
 for j = 1:truthObj.NumObjects
     temp =  synMtx(truthObj.PixelIdxList{j});
     
-    if sum(temp > 0) >= 10%50 %at least 25 voxel overlap to be meaningful
+    if sum(temp > 0) >= 25%50 %at least 25 voxel overlap to be meaningful
         TP = TP + 1;
+        
+        % TODO something fancier
+        % any detected objects can only be used
+        % once, so remove them here.
+        % This does not penalize (or reward) fragmented
+        % detections
+        
+        detectIdxUsed = unique(temp);
+        detectIdxUsed(detectIdxUsed == 0) = [];
+        
     else
         FN = FN + 1;
     end
@@ -69,7 +79,7 @@ end
 for j = 1:detectObj.NumObjects
     temp =  truthMtx(detectObj.PixelIdxList{j});
     
-    if sum(temp > 0) >= 10%50 %at least some voxel overlap to be meaningful
+    if sum(temp > 0) >= 25 %at least some voxel overlap to be meaningful
         %TP = TP + 1;  %don't do this again, because already
         % considered above
         TP2 = TP2 + 1;
@@ -77,7 +87,6 @@ for j = 1:detectObj.NumObjects
         synCorr = mode(temp(temp > 0));
         synOrigId = synMtx(detectObj.PixelIdxList{j}(1));
         ocpS.setField(synOrigId, f.synapse.seeds, synCorr);
-
         
     else
         FP = FP + 1;
@@ -114,9 +123,9 @@ sprintf('There are %d synapses in the DB, and %d synapses with paint in the ROI.
 disp('Deleting extraneous synapses...')
 
 if ~isempty(toDelete)
-ocpS.deleteAnnotation(toDelete)
-disp('Now there are this many synapses in the DB:')
-length(ocpS.query(q))
+    ocpS.deleteAnnotation(toDelete)
+    disp('Now there are this many synapses in the DB:')
+    length(ocpS.query(q))
 else
     disp('No synapses to delete!')
 end

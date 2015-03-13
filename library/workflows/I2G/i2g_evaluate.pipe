@@ -3,11 +3,10 @@
         <connections>
                 <connection source="ResetSemaphore_1.OutFlowControl" sink="DistributedSemaphore_1.InFlowControl" />
                 <connection source="SynapseAlignandError_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
-                <connection source="SegmentWatershedEvaluate_1.flow" sink="DistributedSemaphore_2.InFlowControl" />
                 <connection source="RhoanaI2GEvaluate_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
+                <connection source="SegmentWatershedEvaluate_1.flow" sink="DistributedSemaphore_2.InFlowControl" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="CubeCutout_1.flowin" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="CubeCutout_2.flowin" />
-                <connection source="GraphReportGenerator_1.HTMLZipFile" sink="AnalysisReport_1.Input" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="RhoanaI2GEvaluate_1.FlowIn" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="SegmentWatershedEvaluate_1.FlowIn" />
                 <connection source="GraphJobCollector_1.OutputFile" sink="GraphReportGenerator_1.GraphDataFiles" />
@@ -29,10 +28,10 @@
                 <connection source="NodeEdgeDataFiles_1.Output" sink="GraphJobEnumerator_1.TokenstoEvaluate" />
                 <connection source="DistributedSemaphore_2.OutFlowControl" sink="GraphJobEnumerator_1.FlowControl" />
                 <connection source="CubeCutout_1.outputFile" sink="SegmentError_1.TruthVolume" />
-                <connection source="SegmentWatershedEvaluate_1.labeloutput" sink="SegmentError_1.TestVolume" />
                 <connection source="RhoanaI2GEvaluate_1.LabelMatrix" sink="SegmentError_1.TestVolume" />
-                <connection source="SegmentWatershedEvaluate_1.token" sink="SegmentError_1.SegToken" />
+                <connection source="SegmentWatershedEvaluate_1.labeloutput" sink="SegmentError_1.TestVolume" />
                 <connection source="RhoanaI2GEvaluate_1.SegmentationToken" sink="SegmentError_1.SegToken" />
+                <connection source="SegmentWatershedEvaluate_1.token" sink="SegmentError_1.SegToken" />
                 <connection source="SynapseObjectificationEvaluate_1.synToken" sink="CubeCutout_3.token" />
                 <connection source="SynapseObjectificationEvaluate_1.synServer" sink="CubeCutout_3.ServiceLocation" />
                 <connection source="GraphJobEnumerator_1.GraphListFile" sink="BuildGraphVolume_1.evalTokens" />
@@ -361,24 +360,6 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <dataModule id="AnalysisReport_1" name="Analysis Report" posX="610" posY="1532" rotation="1" sourceCode="" type="File" source="false" loopIndex="false" dirDump="true">
-                        <metadata>
-                                <data key="__creationDateKey" value="Mon Oct 20 16:32:17 EDT 2014" />
-                        </metadata>
-                        <input id="AnalysisReport_1.Input" name="Input" required="true" enabled="true" order="-1">
-                                <format type="File" cardinality="1">
-                                        <fileTypes>
-                                                <filetype name="File" extension="" description="Any type of data file" />
-                                        </fileTypes>
-                                </format>
-                        </input>
-                        <fileTypes>
-                                <filetype name="File" extension="" description="Any type of data file" />
-                        </fileTypes>
-                        <values>
-                                <value>pipeline://neuron.jhuapl.edu/{project_dir}</value>
-                        </values>
-                </dataModule>
                 <module id="RhoanaI2GEvaluate_1" name="Rhoana I2G Evaluate" package="I2G" version="1.0" description="This module runs 3 steps.  it cutouts out data, runs Rhoana, and uploads the resulting segments" icon="2" posX="261" posY="376" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/rhoana_i2g/rhoana_wrapper.py" executableVersion="1.0" gridVariables="-l virtual_free=32G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
@@ -656,7 +637,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="GraphReportGenerator_1" name="Graph Report Generator" package="I2G" version="1.0" description="This module takes in a collection of graph data files from Graph Job Collector and outputs a report." icon="4" posX="314" posY="1488" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_report_gen/report_gen.py" executableVersion="1.0">
+                <module id="GraphReportGenerator_1" name="Graph Report Generator" package="I2G" version="1.0" description="This module takes in a collection of graph data files from Graph Job Collector and outputs a report." icon="4" posX="243" posY="1546" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_report_gen/report_gen.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -677,7 +658,7 @@
                         <input id="GraphReportGenerator_1.ActiveGraphMetrics" name="Active Graph Metrics" description="A CSV string containing the graph metrics you'd like to report." required="true" enabled="true" order="1">
                                 <format type="String" cardinality="1" />
                                 <values>
-                                        <value>score,TP,FP,FN,pvalue,micro</value>
+                                        <value>scoreFrob,scoreF1,TP,FP,FN,pvalFrob, pvalF1,micro</value>
                                 </values>
                         </input>
                         <input id="GraphReportGenerator_1.GraphDataFiles" name="Graph Data Files" description="Collection of Graph Data Files from the Graph Job Collector Module" required="true" enabled="true" order="6" prefix="--graph" prefixSpaced="true" prefixAllArgs="false">
@@ -1552,13 +1533,13 @@
                         <variable name="img_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="syn_anno_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="mebrane_token">cajal3d_membraneFinalPartial</variable>
-                        <variable name="rhoana_anno_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="syn_prob_token">cajal3d_synProbPartial</variable>
                         <variable name="img_token">kasthuri11cc</variable>
+                        <variable name="rhoana_anno_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="node_truth_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="rhoana_cutout">rhoana_cutout.mat</variable>
-                        <variable name="membrane_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="syn_prob_server">braingraph1dev.cs.jhu.edu</variable>
+                        <variable name="membrane_server">braingraph1dev.cs.jhu.edu</variable>
                 </variables>
         </moduleGroup>
 </pipeline>
