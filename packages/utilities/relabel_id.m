@@ -1,19 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% (c) [2014] The Johns Hopkins University / Applied Physics Laboratory All Rights Reserved. Contact the JHU/APL Office of Technology Transfer for any additional rights.  www.jhuapl.edu/ott
-%
-% Licensed under the Apache License, Version 2.0 (the "License");
-% you may not use this file except in compliance with the License.
-% You may obtain a copy of the License at
-%
-%    http://www.apache.org/licenses/LICENSE-2.0
-%
-% Unless required by applicable law or agreed to in writing, software
-% distributed under the License is distributed on an "AS IS" BASIS,
-% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-% See the License for the specific language governing permissions and
-% limitations under the License.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 function [labelOut, nLabel] = relabel_id(labelIn,varargin)
 %This function has two modes of operation:
 %2d mode, which makes sure each slice has a unique ID and relabels
@@ -28,15 +12,16 @@ end
 
 if mode == 3
     id = regionprops(labelIn, 'PixelIdxList','Area');
-    uid = unique(labelIn); %this is an accelerator
+    
     labelOut = uint32(zeros(size(labelIn)));
     count = 1;
-    %tic
-    for i = 1:length(uid)
-        labelOut(id(uid(i)).PixelIdxList) = count;
-        count = count + 1;
+    for i = 1:length(id)
+        if id(i).Area > 0
+            labelOut(id(i).PixelIdxList) = count;
+            count = count + 1;
+        end
     end
-
+    
 elseif mode == 2
     labelOut = uint32(zeros(size(labelIn)));
     count = 1;
@@ -52,11 +37,11 @@ elseif mode == 2
                 count = count + 1;
             end
         end
-        labelOut(:,:,i) = sliceOut;
+    labelOut(:,:,i) = sliceOut;    
     end
     
-    else
-        error('merge mode not supported.')
+else
+    error('merge mode not supported.')
 end
 
 
