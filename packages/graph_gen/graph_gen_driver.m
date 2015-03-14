@@ -21,7 +21,7 @@ useSemaphore, attredgeFile, segErrFile, graphErrFile)
 % See the License for the specific language governing permissions and
 % limitations under the License.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+error('reworking this file')
 % Process test graph
 edgeList = synapse_neuron_association(edgeServer, edgeToken, ...
     [], nodeServer, nodeToken, resolution, 0, useSemaphore);

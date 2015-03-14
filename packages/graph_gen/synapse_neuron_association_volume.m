@@ -52,7 +52,7 @@ synDil = 9;
 % This isn't scalable, but is much faster
 
 uid = unique(sMtxCube.data); %all IDs
-sMtx = imdilate(sMtxCube.data,strel('disk',5));
+sMtx = imdilate(sMtxCube.data,strel('disk',synDil));
 
 % Any pixels that are not in the original set get removed
 % Any original pixels that got overwritten are restored

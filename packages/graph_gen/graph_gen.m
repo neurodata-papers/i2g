@@ -15,7 +15,7 @@ function [edgeList,  attedgedata, attedgeheader] = graph_gen(synLocation, synTok
 % See the License for the specific language governing permissions and
 % limitations under the License.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+error('Reworking file')
 edgeList = synapse_neuron_association(synLocation, synToken, synResolution, [], neuLocation, neuToken, neuResolution, 0);
 
 attedgedata = [edgeList(:,2), edgeList(:,3), edgeList(:,1), zeros(size(edgeList(:,1)))];
