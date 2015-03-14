@@ -50,10 +50,7 @@ gErrMetrics  =  compute_graph_error(lgTest, lgTruth);
 gErrMetrics.neuGraph = neuGraph;
 gErrMetrics.nId = nId;
 gErrMetrics.lgTest = lgTest;
-gErrMetrics.lgId = lgId;
-
+gErrMetrics.lgTestId = lgId;
+gErrMetrics.lgTruth = lgTruth;
+gErrMetrics.lgTruthId = lgIdTruth;
 save(graphErrFile, 'gErrMetrics')
-
-%% Experimental - save graph file as an attributed edge file
-% Nodes are synapses
-

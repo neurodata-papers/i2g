@@ -36,10 +36,10 @@ gErr.scoreFrob = norm(single(lgTruthFB-lgTestFB),'fro');%  sum(sum(abs(logical(l
 % end
 %nel = size(mtxDiff,1);
 
-gErr.TP = sum(lgTestFB == 1 & lgTruthFB == 1);
-gErr.FP = sum(lgTestFB == 1 & lgTruthFB == 0);
-gErr.FN = sum(lgTestFB == 0 & lgTruthFB == 1);
-gErr.TN = sum(lgTestFB == 0 & lgTruthFB == 0);
+gErr.TP = sum(sum(lgTestFB == 1 & lgTruthFB == 1));
+gErr.FP = sum(sum(lgTestFB == 1 & lgTruthFB == 0));
+gErr.FN = sum(sum(lgTestFB == 0 & lgTruthFB == 1));
+gErr.TN = sum(sum(lgTestFB == 0 & lgTruthFB == 0));
 gErr.sum = gErr.FP + gErr.FN + gErr.TN + gErr.TP;
 gErr.connFound = sum(lgTestFB(:));
 gErr.connTrue = sum(lgTruthFB(:));
@@ -87,7 +87,8 @@ for i = 1:nIter
 toc
 
 gErr.pvalFrob = sum(gErr.scoreFrob > pscoreFrob)/nIter;
-gErr.pvalF1 = sum(gErr.scoreF1 > pscoreF1)/nIter;
+gErr.pvalF1 = sum(gErr.scoreF1 < pscoreF1)/nIter;  % Here the numbers go the other way
+
 
 
 
