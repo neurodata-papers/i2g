@@ -2,9 +2,9 @@
 <pipeline version=".2">
         <connections>
                 <connection source="ResetSemaphore_1.OutFlowControl" sink="DistributedSemaphore_1.InFlowControl" />
-                <connection source="SynapseAlignandError_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
-                <connection source="RhoanaI2GEvaluate_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
                 <connection source="SegmentWatershedEvaluate_1.flow" sink="DistributedSemaphore_2.InFlowControl" />
+                <connection source="RhoanaI2GEvaluate_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
+                <connection source="SynapseAlignandError_1.FlowControl" sink="DistributedSemaphore_2.InFlowControl" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="CubeCutout_1.flowin" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="CubeCutout_2.flowin" />
                 <connection source="DistributedSemaphore_1.OutFlowControl" sink="RhoanaI2GEvaluate_1.FlowIn" />
@@ -28,10 +28,10 @@
                 <connection source="NodeEdgeDataFiles_1.Output" sink="GraphJobEnumerator_1.TokenstoEvaluate" />
                 <connection source="DistributedSemaphore_2.OutFlowControl" sink="GraphJobEnumerator_1.FlowControl" />
                 <connection source="CubeCutout_1.outputFile" sink="SegmentError_1.TruthVolume" />
-                <connection source="RhoanaI2GEvaluate_1.LabelMatrix" sink="SegmentError_1.TestVolume" />
                 <connection source="SegmentWatershedEvaluate_1.labeloutput" sink="SegmentError_1.TestVolume" />
-                <connection source="RhoanaI2GEvaluate_1.SegmentationToken" sink="SegmentError_1.SegToken" />
+                <connection source="RhoanaI2GEvaluate_1.LabelMatrix" sink="SegmentError_1.TestVolume" />
                 <connection source="SegmentWatershedEvaluate_1.token" sink="SegmentError_1.SegToken" />
+                <connection source="RhoanaI2GEvaluate_1.SegmentationToken" sink="SegmentError_1.SegToken" />
                 <connection source="SynapseObjectificationEvaluate_1.synToken" sink="CubeCutout_3.token" />
                 <connection source="SynapseObjectificationEvaluate_1.synServer" sink="CubeCutout_3.ServiceLocation" />
                 <connection source="GraphJobEnumerator_1.GraphListFile" sink="BuildGraphVolume_1.evalTokens" />
@@ -159,7 +159,7 @@
                         <input id="DistributedSemaphore_2.Value" name="Value" description="If changing read or write permits, the number to use.  If reset, ignored." required="false" enabled="true" order="3" prefix="-d" prefixSpaced="true" prefixAllArgs="false">
                                 <format type="Number" cardinality="1" />
                                 <values>
-                                        <value>40</value>
+                                        <value>50</value>
                                 </values>
                         </input>
                         <input id="DistributedSemaphore_2.Operation" name="Operation" description="The operation you'd like to perform&#xA;read - change the number of read permits&#xA;write - change the number of write permits&#xA;reset - reset to server defaults" required="true" enabled="true" order="2" prefix="-s" prefixSpaced="true" prefixAllArgs="false">
@@ -360,7 +360,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="RhoanaI2GEvaluate_1" name="Rhoana I2G Evaluate" package="I2G" version="1.0" description="This module runs 3 steps.  it cutouts out data, runs Rhoana, and uploads the resulting segments" icon="2" posX="261" posY="376" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/rhoana_i2g/rhoana_wrapper.py" executableVersion="1.0" gridVariables="-l virtual_free=32G">
+                <module id="RhoanaI2GEvaluate_1" name="Rhoana I2G Evaluate" package="I2G" version="1.0" description="This module runs 3 steps.  it cutouts out data, runs Rhoana, and uploads the resulting segments" icon="2" posX="261" posY="376" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/rhoana_i2g/rhoana_wrapper.py" executableVersion="1.0" gridVariables="-l virtual_free=24G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -637,7 +637,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="GraphReportGenerator_1" name="Graph Report Generator" package="I2G" version="1.0" description="This module takes in a collection of graph data files from Graph Job Collector and outputs a report." icon="4" posX="243" posY="1546" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_report_gen/report_gen.py" executableVersion="1.0">
+                <module id="GraphReportGenerator_1" name="Graph Report Generator" package="I2G" version="1.0" description="This module takes in a collection of graph data files from Graph Job Collector and outputs a report." icon="4" posX="182" posY="1531" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_report_gen/report_gen.py" executableVersion="1.0">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -658,7 +658,7 @@
                         <input id="GraphReportGenerator_1.ActiveGraphMetrics" name="Active Graph Metrics" description="A CSV string containing the graph metrics you'd like to report." required="true" enabled="true" order="1">
                                 <format type="String" cardinality="1" />
                                 <values>
-                                        <value>scoreFrob,scoreF1,TP,FP,FN,pvalFrob, pvalF1,micro</value>
+                                        <value>scoreFrob,scoreF1,TP,FP,FN,pvalFrob,pvalF1,micro</value>
                                 </values>
                         </input>
                         <input id="GraphReportGenerator_1.GraphDataFiles" name="Graph Data Files" description="Collection of Graph Data Files from the Graph Job Collector Module" required="true" enabled="true" order="6" prefix="--graph" prefixSpaced="true" prefixAllArgs="false">
@@ -704,7 +704,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="" />
                         </executableAuthors>
                 </module>
-                <module id="ConvertEdgeList_1" name="Convert Edge List" package="I2G" version="1.0" description="This module converts and attributed edge list csv file to any other graph format supported by the OCP graph convert service.&#xA;&#xA;&quot;Input File&quot; should be a csv ending in .attredge with the format&#xA;&#xA;#column header&#xA;entry1...&#xA;entry2...&#xA;&#xA;Typically this is&#xA;#node1, node2, edge attribute, edge attribute,...&#xA;" icon="5" posX="495" posY="1138" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/convert_edge_list_format.py" executableVersion="1.0">
+                <module id="ConvertEdgeList_1" name="Convert Edge List" package="I2G" version="1.0" description="This module converts and attributed edge list csv file to any other graph format supported by the OCP graph convert service.&#xA;&#xA;&quot;Input File&quot; should be a csv ending in .attredge with the format&#xA;&#xA;#column header&#xA;entry1...&#xA;entry2...&#xA;&#xA;Typically this is&#xA;#node1, node2, edge attribute, edge attribute,...&#xA;" icon="5" posX="495" posY="1138" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/convert_edge_list_format.py" executableVersion="1.0" gridVariables="-l virtual_free=16G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -752,7 +752,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="" />
                         </executableAuthors>
                 </module>
-                <module id="GraphError_1" name="Graph Error" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="1095" posY="1205" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/metrics/graph_error.py" executableVersion="1.0" gridVariables="-l virtual_free=6G">
+                <module id="GraphError_1" name="Graph Error" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="1095" posY="1205" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/metrics/graph_error.py" executableVersion="1.0" gridVariables="-l virtual_free=16G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -1369,7 +1369,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="BuildGraphVolume_1" name="Build Graph Volume" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="581" posY="938" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/build_graph_volume.py" executableVersion="1.0" gridVariables="-l virtual_free=8G">
+                <module id="BuildGraphVolume_1" name="Build Graph Volume" package="I2G" version="1.0" description="Default Segment Watershed&#xA; Package&#xA;&#xA;" icon="3" posX="581" posY="938" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/build_graph_volume.py" executableVersion="1.0" gridVariables="-l virtual_free=16G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -1448,7 +1448,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="SaveGraphOutput_1" name="Save Graph Output" package="I2G" version="1.0" description="This module converts and attributed edge list csv file to any other graph format supported by the OCP graph convert service.&#xA;&#xA;&quot;Input File&quot; should be a csv ending in .attredge with the format&#xA;&#xA;#column header&#xA;entry1...&#xA;entry2...&#xA;&#xA;Typically this is&#xA;#node1, node2, edge attribute, edge attribute,...&#xA;" icon="5" posX="964" posY="1404" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/save_graph_output.py" executableVersion="1.0">
+                <module id="SaveGraphOutput_1" name="Save Graph Output" package="I2G" version="1.0" description="This module converts and attributed edge list csv file to any other graph format supported by the OCP graph convert service.&#xA;&#xA;&quot;Input File&quot; should be a csv ending in .attredge with the format&#xA;&#xA;#column header&#xA;entry1...&#xA;entry2...&#xA;&#xA;Typically this is&#xA;#node1, node2, edge attribute, edge attribute,...&#xA;" icon="5" posX="964" posY="1404" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/graph_gen/save_graph_output.py" executableVersion="1.0" gridVariables="-l virtual_free=16G">
                         <authors>
                                 <author fullName="William Gray Roncal and Dean Kleissas" email="wgr@jhu.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -1528,18 +1528,18 @@
                         <variable name="watershed_cutout">watershed_cutout.mat</variable>
                         <variable name="synapse_cutout">synapse_cutout.mat</variable>
                         <variable name="edge_truth_server">braingraph1dev.cs.jhu.edu</variable>
-                        <variable name="project_dir">/mnt/pipeline/scratch/image2graph_v21</variable>
+                        <variable name="project_dir">/mnt/pipeline/scratch/image2graph_v23</variable>
                         <variable name="edge_truth_token">cshl_baseline_ac4_synapse_truth</variable>
                         <variable name="img_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="syn_anno_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="mebrane_token">cajal3d_membraneFinalPartial</variable>
-                        <variable name="syn_prob_token">cajal3d_synProbPartial</variable>
                         <variable name="img_token">kasthuri11cc</variable>
                         <variable name="rhoana_anno_server">braingraph1dev.cs.jhu.edu</variable>
+                        <variable name="syn_prob_token">cajal3d_synProbPartial</variable>
                         <variable name="node_truth_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="rhoana_cutout">rhoana_cutout.mat</variable>
-                        <variable name="syn_prob_server">braingraph1dev.cs.jhu.edu</variable>
                         <variable name="membrane_server">braingraph1dev.cs.jhu.edu</variable>
+                        <variable name="syn_prob_server">braingraph1dev.cs.jhu.edu</variable>
                 </variables>
         </moduleGroup>
 </pipeline>

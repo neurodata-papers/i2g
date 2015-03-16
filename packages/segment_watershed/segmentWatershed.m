@@ -59,19 +59,36 @@ labelOut = watershed(zz,26);
 
 labelOutZ = labelOut;
 
-%find small pixels
-rp = regionprops(labelOut,'Area');
-idx = ismember(labelOut,find([rp.Area]< minSize));
+rp = regionprops(labelOutZ,'PixelIdxList','Area');
+areaAll = [rp.Area];
+toRemove = find(areaAll < minSize); %perhaps 500 pixels
 
-%set to zero for imfill
-labelOutZ(idx) = 0;
+% Need to do per slice and per object
+% relabel...
 
-for i = 1:size(labelOutZ,3)
-    temp = labelOutZ(:,:,i);
-    temp = imfill(temp, 4, 'holes');
-    labelOutZ(:,:,i) = temp;
+
+for i = 1:length(toRemove)
+   labelOutZ(rp(toRemove(i)).PixelIdxList) = 0;
 end
+
+
+labelOutZ = cleanup_speckle(labelOutZ);
 [labelOutZ,n] = relabel_id(labelOutZ);
+
+
+% %find small pixels
+% rp = regionprops(labelOut,'Area');
+% idx = ismember(labelOut,find([rp.Area]< minSize));
+% 
+% %set to zero for imfill
+% labelOutZ(idx) = 0;
+% 
+% for i = 1:size(labelOutZ,3)
+%     temp = labelOutZ(:,:,i);
+%     temp = imfill(temp, 4, 'holes');
+%     labelOutZ(:,:,i) = temp;
+% end
+% [labelOutZ,n] = relabel_id(labelOutZ);
 
 n
 
