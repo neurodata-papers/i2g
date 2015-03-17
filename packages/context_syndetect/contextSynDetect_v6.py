@@ -116,7 +116,7 @@ if exit_code != 0:
 
 ##### RUN Detector
 # Build call to Context Synapse Detector
-args = os.path.join(I2GRoot, 'packages','context_syndetect', 'contextSynDetectWrapper_v6.m') + emCube + imgServer + imgToken + vesicleServer + vesicleToken + membraneServer + membraneToken + annoServer + annoToken + queryFile + intensityBounds + classifier + padX + padY + padZ + useSemaphore
+args = os.path.join([I2GRoot], 'packages','context_syndetect', 'contextSynDetectWrapper_v6.m') + emCube + imgServer + imgToken + vesicleServer + vesicleToken + membraneServer + membraneToken + annoServer + annoToken + queryFile + intensityBounds + classifier + padX + padY + padZ + useSemaphore
 
 # Call Context Synapse Detector
 process = Popen(args, stdout=PIPE, stderr=PIPE)
