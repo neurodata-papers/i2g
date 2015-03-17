@@ -50,7 +50,7 @@ padY = params[24:26]
 padZ = params[26:28]
 useSemaphore = params[28:30]
 emCube = params[30:32]
-
+memCube = params[32:34]
 
 # get root directory of framework
 frameworkRoot = os.getenv("CAJAL3D_LOCATION")
@@ -85,19 +85,7 @@ if exit_code != 0:
     sys.stderr.write(proc_error)
     exit(exit_code)
 
-
-
-
-##### CUTOUT Membrane DATA
-#if membraneToken is None:
-#	print "Skipping membranes"
-#	membraneCube = '';
-#else:
-#
-#	# Build call to Cube Cutout
-#	args = [wrapper] + ["packages/cubeCutout/cubeCutout.m"] + membraneToken + queryFile + membraneCube + useSemaphore + ["-d", "0"] + getLocation + ["-b", "0"]
-
-	# Call Cube Cutout
+# Call Cube Cutout
 #	process = Popen(args, stdout=PIPE, stderr=PIPE)
 #	output = process.communicate()
 #	proc_error = output[1]

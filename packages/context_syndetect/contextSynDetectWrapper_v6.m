@@ -19,8 +19,6 @@ function contextSynDetectWrapper_v6(emCube, imgServer, imgToken, vesicleServer, 
 % limitations under the License.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
 if ~exist('padX','var')
     padX = 0;
 end
@@ -56,7 +54,7 @@ load(queryFile);
 query.setType(eOCPQueryType.annoDense);
 vesicles = oo.query(query);
 
-% Membrane Cube
+%% Download Membrane Cube
 oo.setServerLocation(membraneServer);
 oo.setAnnoToken(membraneToken);
 query.setType(eOCPQueryType.probDense);

@@ -70,7 +70,7 @@ function labels = vesicle_detect_quick2(em, template,neighborhood_size, neighbor
         labels = [];
         return;
     end
-    
+    data_set
     % Fix anisotropy at scale 1 and put into nm
     if data_set == 0
         centroids = bsxfun(@times,centroids,[6,6,30]);
