@@ -57,6 +57,12 @@ frameworkRoot = os.getenv("CAJAL3D_LOCATION")
 if frameworkRoot is None:
     raise Exception('You must set the CAJAL3D_LOCATION environment variable so the wrapper knows where the framework is!')
 
+
+# get root directory of I2G
+I2GRoot = os.getenv("I2G_LOCATION")
+if frameworkRoot is None:
+    raise Exception('You must set the I2G_LOCATION environment variable so the wrapper knows where the framework is!')
+
 # Gen path of matlab wrapper
 wrapper = os.path.join(frameworkRoot, 'api', 'matlab','wrapper','basicWrapper.py')
 
@@ -110,7 +116,7 @@ if exit_code != 0:
 
 ##### RUN Detector
 # Build call to Context Synapse Detector
-args = [wrapper] + ["packages/context_syndetect/contextSynDetectWrapper_v6.m"] + emCube + imgServer + imgToken + vesicleServer + vesicleToken + membraneServer + membraneToken + annoServer + annoToken + queryFile + intensityBounds + classifier + padX + padY + padZ + useSemaphore
+args = os.path.join(I2GRoot, 'packages','context_syndetect', 'contextSynDetectWrapper_v6.m') + emCube + imgServer + imgToken + vesicleServer + vesicleToken + membraneServer + membraneToken + annoServer + annoToken + queryFile + intensityBounds + classifier + padX + padY + padZ + useSemaphore
 
 # Call Context Synapse Detector
 process = Popen(args, stdout=PIPE, stderr=PIPE)
