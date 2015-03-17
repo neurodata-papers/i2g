@@ -70,7 +70,7 @@ wrapper = os.path.join(frameworkRoot, 'api', 'matlab','wrapper','basicWrapper.py
 ##### CUTOUT EM DATA
 # Build call to Cube Cutout
 args = [wrapper] + ["packages/cubeCutout/cubeCutout.m"] + imgToken + queryFile + emCube + useSemaphore + ["-d", "0"] + imgServer + ["-b", "0"]
-
+print args
 # Call Cube Cutout
 process = Popen(args, stdout=PIPE, stderr=PIPE)
 output = process.communicate()
@@ -119,6 +119,7 @@ if exit_code != 0:
 csd_wrapper = os.path.join(I2GRoot, 'packages','context_syndetect', 'contextSynDetectWrapper_v6.m')
 args = [csd_wrapper] + emCube + imgServer + imgToken + vesicleServer + vesicleToken + membraneServer + membraneToken + annoServer + annoToken + queryFile + intensityBounds + classifier + padX + padY + padZ + useSemaphore
 
+print args
 # Call Context Synapse Detector
 process = Popen(args, stdout=PIPE, stderr=PIPE)
 output = process.communicate()
