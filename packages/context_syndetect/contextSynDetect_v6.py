@@ -116,8 +116,8 @@ if exit_code != 0:
 
 ##### RUN Detector
 # Build call to Context Synapse Detector
-csd_wrapper = os.path.join(I2GRoot, 'packages','context_syndetect', 'contextSynDetectWrapper_v6.m')
-args = [csd_wrapper] + emCube + imgServer + imgToken + vesicleServer + vesicleToken + membraneServer + membraneToken + annoServer + annoToken + queryFile + intensityBounds + classifier + padX + padY + padZ + useSemaphore
+wrapperI2G = os.path.join(I2GRoot, 'packages','utilities', 'basicWrapperI2G.py')
+args = [wrapperI2G] + ["packages/context_syndetect/contextSynDetectWrapper_v6.m"] + emCube + imgServer + imgToken + vesicleServer + vesicleToken + membraneServer + membraneToken + annoServer + annoToken + queryFile + intensityBounds + classifier + padX + padY + padZ + useSemaphore
 
 print args
 # Call Context Synapse Detector
