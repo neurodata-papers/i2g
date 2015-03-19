@@ -74,7 +74,7 @@ for i = 1:nIter
     ptest = zeros(size(lgTest));
     ptest(chooseIdx(1:length(nEntry))) = 1;
     ptest = matrixFull(ptest);
-    pscoreFrob(i) = norm(single(lgTruthFB-ptest),'fro');
+    pscoreFrob(i) = norm(single(lgTruthFB)-single(ptest)),'fro');
     
     TP = sum(ptest == 1 & lgTruthFB == 1);
     FP = sum(ptest == 1 & lgTruthFB == 0);
