@@ -55,7 +55,7 @@ def main():
   tmpfile.flush()
   tmpfile.seek(0)
 
-  sleep(random.random()*5) # Try to reduce server load
+  sleep(random.random()*15) # Try to reduce server load
 
   try:
     req = urllib2.Request(url, tmpfile.read())

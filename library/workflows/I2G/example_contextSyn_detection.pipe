@@ -240,7 +240,7 @@
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </executableAuthors>
                 </module>
-                <module id="ContextSynapseDetectorwCutout_1" name="Context Synapse Detector w/ Cutout" package="I2G" version="1.0" description="This module wraps two modules to emulate workflow level parallelization.&#xA;&#xA;First it injests an OCPQuery object and based on the parameters, retrieves data from the Open Connectome Project servers and saves a .mat file for pipeline use.&#xA;&#xA;Then it performs automated transverse synapse detection and uploads the results to the specified OCP annotation database.  It has been verified to work reasonably well on the bock11 dataset.&#xA;&#xA;&#xA;" icon="0" posX="173" posY="346" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/context_syndetect/contextSynDetect_v6.py" executableVersion="1.0" gridVariables="-l virtual_free=4G">
+                <module id="ContextSynapseDetectorwCutout_1" name="Context Synapse Detector w/ Cutout" package="I2G" version="1.0" description="This module wraps two modules to emulate workflow level parallelization.&#xA;&#xA;First it injests an OCPQuery object and based on the parameters, retrieves data from the Open Connectome Project servers and saves a .mat file for pipeline use.&#xA;&#xA;Then it performs automated transverse synapse detection and uploads the results to the specified OCP annotation database.  It has been verified to work reasonably well on the bock11 dataset.&#xA;&#xA;&#xA;" icon="0" posX="173" posY="347" sourceCode="" location="pipeline://neuron.jhuapl.edu//mnt/pipeline/tools/i2g/packages/context_syndetect/contextSynDetect_v6.py" executableVersion="1.0" gridVariables="-l virtual_free=4G">
                         <authors>
                                 <author fullName="Dean Kleissas" email="dean.kleissas@jhuapl.edu" website="www.jhuapl.edu" />
                         </authors>
@@ -372,15 +372,15 @@
                 </module>
                 <variables>
                         <variable name="emToken">kasthuri11cc</variable>
-                        <variable name="annoToken">kasthuri11cc_synprob_ac3</variable>
-                        <variable name="yStop">9900</variable>
                         <variable name="vesicleLocation">http://braingraph1dev.cs.jhu.edu/</variable>
-                        <variable name="yStart">8600</variable>
+                        <variable name="yStop">9900</variable>
+                        <variable name="annoToken">kasthuri11cc_synprob_ac3</variable>
                         <variable name="serviceLocation">http://braingraph1dev.cs.jhu.edu/</variable>
+                        <variable name="yStart">8600</variable>
                         <variable name="xStop">6600</variable>
                         <variable name="xSpan">1000</variable>
-                        <variable name="xStart">5300</variable>
                         <variable name="imgToken">kasthuri11cc</variable>
+                        <variable name="xStart">5300</variable>
                         <variable name="serverLocation">http://braingraph1dev.cs.jhu.edu/</variable>
                         <variable name="zSpan">100</variable>
                         <variable name="zStart">980</variable>

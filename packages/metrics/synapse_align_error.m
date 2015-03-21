@@ -57,7 +57,7 @@ detectObj = bwconncomp(synMtx,26);
 TP = 0; FP = 0; FN = 0; TP2 = 0;
 
 for j = 1:truthObj.NumObjects
-    temp =  synMtx(truthObj.PixelIdxList{j});
+    temp = synMtx(truthObj.PixelIdxList{j});
     
     if sum(temp > 0) >= 25%50 %at least 25 voxel overlap to be meaningful
         TP = TP + 1;
@@ -67,10 +67,17 @@ for j = 1:truthObj.NumObjects
         % once, so remove them here.
         % This does not penalize (or reward) fragmented
         % detections
+        dMatch = mode(temp(temp>0));
+        % detectIdxUsed = unique(temp);
+        if ~isnan(dMatch)
+            %detectIdxUsed(detectIdxUsed == 0) = [];
+            synMtx(synMtx == dMatch) = 0;
+        end
         
-        detectIdxUsed = unique(temp);
-        detectIdxUsed(detectIdxUsed == 0) = [];
-        
+        % not used here
+%         synCorr = dMatch;
+%         synOrigId = synMtx(detectObj.PixelIdxList{j}(1));
+%         ocpS.setField(synOrigId, f.synapse.seeds, synCorr);
     else
         FN = FN + 1;
     end
@@ -84,9 +91,7 @@ for j = 1:detectObj.NumObjects
         % considered above
         TP2 = TP2 + 1;
         
-        synCorr = mode(temp(temp > 0));
-        synOrigId = synMtx(detectObj.PixelIdxList{j}(1));
-        ocpS.setField(synOrigId, f.synapse.seeds, synCorr);
+       
         
     else
         FP = FP + 1;
