@@ -128,7 +128,11 @@ sprintf('There are %d synapses in the DB, and %d synapses with paint in the ROI.
 disp('Deleting extraneous synapses...')
 
 if ~isempty(toDelete)
+    try
     ocpS.deleteAnnotation(toDelete)
+    catch % try this again
+    ocpS.deleteAnnotation(toDelete)
+    end
     disp('Now there are this many synapses in the DB:')
     length(ocpS.query(q))
 else

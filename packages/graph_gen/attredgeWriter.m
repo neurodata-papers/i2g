@@ -35,7 +35,7 @@ elseif size(edgeList,2) == 5
     
     fprintf(fid,attedgeheader);
     fprintf(fid,'\n');
-    for i = 1:length(edgeList)
+    for i = 1:size(edgeList,1) %use size to be more explicit
         fprintf(fid,'%d, %d, %d, %d, %d\n',edgeList(i,1), edgeList(i,2), edgeList(i,3), edgeList(i,4), edgeList(i,5));
     end
     
