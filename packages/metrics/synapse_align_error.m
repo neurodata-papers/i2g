@@ -21,6 +21,7 @@ f = OCPFields;
 load(synTestFile)
 whos
 synMtx = cube.data;
+synMtxOrig = cube.data;
 clear cube
 synTruthFile
 load(synTruthFile)
@@ -74,14 +75,12 @@ for j = 1:truthObj.NumObjects
             synMtx(synMtx == dMatch) = 0;
         end
         
-        % not used here
-%         synCorr = dMatch;
-%         synOrigId = synMtx(detectObj.PixelIdxList{j}(1));
-%         ocpS.setField(synOrigId, f.synapse.seeds, synCorr);
     else
         FN = FN + 1;
     end
 end
+
+synMtx = synMtxOrig;
 
 for j = 1:detectObj.NumObjects
     temp =  truthMtx(detectObj.PixelIdxList{j});
@@ -99,8 +98,7 @@ for j = 1:detectObj.NumObjects
     end
 end
 
-
-precision= TP./(TP+FP)
+precision = TP./(TP+FP)
 recall = TP./(TP+FN)
 
 synErr.TP = TP;
@@ -115,7 +113,7 @@ synErr.token = synToken;
 save(synErrFile,'synErr')
 
 % Removing synapses not in the paint
-synExist = unique(synMtx);
+synExist = unique(synMtxOrig);
 synExist(synExist == 0) = [];
 q = OCPQuery;
 q.setType(eOCPQueryType.RAMONIdList);
