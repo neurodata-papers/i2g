@@ -63,41 +63,41 @@ uid = unique(sMtx); %all IDs
 rp = regionprops(sMtx,'PixelIdxList','Area');
 edgeList = double(zeros(length(rp),5));
 
-for i = uid%length(rp)
-    
-    % Find overlaps x2
-    
-    sId = nMtxCube.data(rp(i).PixelIdxList);
-    %sId = unique(sId);
-    
-    sId(sId == 0) = [];
-    
-    sp1 = mode(sId);
-    
-    sId(sId == sp1) = [];
-    
-    sp2 = mode(sId);
-    
-    % Skipping direction
-    direction = 0;
-    
-    synDatabaseId = double(i);
-    
-    temp = sMtxTruth.data(rp(i).PixelIdxList);
-    tSyn = double(mode(temp(temp > 0)));
-    
-    % If no correspondence, assign a negative value, which is guaranteed to be unique
-    if isempty(tSyn) || isnan(tSyn) || tSyn == 0
-        parentSyn = -1 * double(synDatabaseId);
+for i = 1:length(rp) %uid%length(rp) TODO: can clean this up to be more efficient
+    if rp(i).Area > 0
+        % Find overlaps x2
         
-        % Otherwise, use a known good value
-    else
+        sId = nMtxCube.data(rp(i).PixelIdxList);
+        %sId = unique(sId);
         
-        parentSyn = tSyn;
+        sId(sId == 0) = [];
+        
+        sp1 = mode(sId);
+        
+        sId(sId == sp1) = [];
+        
+        sp2 = mode(sId);
+        
+        % Skipping direction
+        direction = 0;
+        
+        synDatabaseId = double(i);
+        
+        temp = sMtxTruth.data(rp(i).PixelIdxList);
+        tSyn = double(mode(temp(temp > 0)));
+        
+        % If no correspondence, assign a negative value, which is guaranteed to be unique
+        if isempty(tSyn) || isnan(tSyn) || tSyn == 0
+            parentSyn = -1 * double(synDatabaseId);
+            
+            % Otherwise, use a known good value
+        else
+            
+            parentSyn = tSyn;
+        end
+        
+        % Write edge list row
+        edgeList(i,:) = ([double(sp1); double(sp2); double(synDatabaseId); double(direction); double(parentSyn)]); %NaNs if empty ?
     end
-    
-    % Write edge list row
-    edgeList(i,:) = ([double(sp1); double(sp2); double(synDatabaseId); double(direction); double(parentSyn)]); %NaNs if empty ?
-      
 end
 edgeList %#ok<NOPRT>
