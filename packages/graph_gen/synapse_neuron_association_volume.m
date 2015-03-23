@@ -16,7 +16,7 @@ function edgeList = synapse_neuron_association_volume(neuToken, neuLocation, syn
 % limitations under the License.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-disp('with new edits')
+disp('with new edits 2')
 load(synTruthFile)
 load(queryFile)
 
@@ -63,7 +63,7 @@ uid = unique(sMtx); %all IDs
 rp = regionprops(sMtx,'PixelIdxList','Area');
 edgeList = double(zeros(length(rp),5));
 
-for i = 1:uid%length(rp)
+for i = uid%length(rp)
     
     % Find overlaps x2
     
