@@ -20,10 +20,10 @@ lgTruthF = matrixFull(lgTruth);
 lgTestF = matrixFull(lgTest);
 
 %using binary undirected graphs, no self loops for now TODO
-lgTruthFB = uint8(lgTruthF > 0);
-lgTestFB = uint8(lgTestF > 0);
+lgTruthFB = single(lgTruthF > 0);
+lgTestFB = single(lgTestF > 0);
 
-gErr.scoreFrob = norm(single(lgTruthFB-lgTestFB),'fro');%  sum(sum(abs(logical(lgTruth)-logical(lgTest))));
+gErr.scoreFrob = norm(lgTruthFB-lgTestFB,'fro');%  sum(sum(abs(logical(lgTruth)-logical(lgTest))));
 
 %mtxDiff = lgTruthFB - lgTestFB;
 
