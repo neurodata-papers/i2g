@@ -40,6 +40,32 @@ ocpS.setServerLocation(synLocation);
 ocpS.setAnnoToken(synToken);
 ocpS.setDefaultResolution(resolution);
 
+
+%% Removing synapses not in the paint
+synExist = unique(synMtxOrig);
+synExist(synExist == 0) = [];
+q = OCPQuery;
+q.setType(eOCPQueryType.RAMONIdList);
+q.setResolution(resolution);
+
+synAll = ocpS.query(q);
+toDelete = synAll(~ismember(synAll, synExist))
+
+sprintf('There are %d synapses in the DB, and %d synapses with paint in the ROI.\n', length(synAll), length(synExist))
+disp('Deleting extraneous synapses...')
+
+if ~isempty(toDelete)
+    try
+    ocpS.deleteAnnotation(toDelete)
+    catch % try this again
+    ocpS.deleteAnnotation(toDelete)
+    end
+    disp('Now there are this many synapses in the DB:')
+    length(ocpS.query(q))
+else
+    disp('No synapses to delete!')
+end
+
 %% Need to do alignment similar to csd, plus set fields
 
 cc = bwconncomp(synMtx,18);
@@ -90,8 +116,6 @@ for j = 1:detectObj.NumObjects
         % considered above
         TP2 = TP2 + 1;
         
-       
-        
     else
         FP = FP + 1;
         
@@ -111,28 +135,3 @@ synErr.nTest = detectObj.NumObjects;
 synErr.token = synToken;
 
 save(synErrFile,'synErr')
-
-% Removing synapses not in the paint
-synExist = unique(synMtxOrig);
-synExist(synExist == 0) = [];
-q = OCPQuery;
-q.setType(eOCPQueryType.RAMONIdList);
-q.setResolution(resolution);
-
-synAll = ocpS.query(q);
-toDelete = synAll(~ismember(synAll, synExist))
-
-sprintf('There are %d synapses in the DB, and %d synapses with paint in the ROI.\n', length(synAll), length(synExist))
-disp('Deleting extraneous synapses...')
-
-if ~isempty(toDelete)
-    try
-    ocpS.deleteAnnotation(toDelete)
-    catch % try this again
-    ocpS.deleteAnnotation(toDelete)
-    end
-    disp('Now there are this many synapses in the DB:')
-    length(ocpS.query(q))
-else
-    disp('No synapses to delete!')
-end
