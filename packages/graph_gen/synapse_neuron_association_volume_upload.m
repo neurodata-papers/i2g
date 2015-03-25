@@ -1,4 +1,4 @@
-function edgeList = synapse_neuron_association_volume_upload(neuToken, neuLocation, synToken, synLocation, queryFile, useSemaphore)
+function edgeList = synapse_neuron_association_volume_upload(neuToken, neuLocation, synToken, synLocation, resolution, queryFile, useSemaphore)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) [2014] The Johns Hopkins University / Applied Physics Laboratory All Rights Reserved. Contact the JHU/APL Office of Technology Transfer for any additional rights.  www.jhuapl.edu/ott

@@ -24,6 +24,7 @@ errCount = 0;
 for i = 1:length(synAll)
     
     % Get all segments for this synapse 
+    synAll
     z = cell2mat(synAll{i}.segments.keys);
     
     if length(z) == 2
