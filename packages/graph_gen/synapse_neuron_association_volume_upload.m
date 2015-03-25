@@ -1,4 +1,4 @@
-function edgeList = synapse_neuron_association_volume_upload(neuToken, neuLocation, synToken, synLocation, resolution, queryFile, useSemaphore)
+function = synapse_neuron_association_volume_upload(neuToken, neuLocation, synToken, synLocation, resolution, queryFile, useSemaphore)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) [2014] The Johns Hopkins University / Applied Physics Laboratory All Rights Reserved. Contact the JHU/APL Office of Technology Transfer for any additional rights.  www.jhuapl.edu/ott
@@ -59,27 +59,29 @@ sMtx(~ismember(sMtx,uid)) = 0;
 sMtx(sMtxCube.data > 0) = sMtxCube.data(sMtxCube.data  >0);
 
 % Clip boundaries
-bSyn = [unique(sMtx(:,:,1)), unique(sMtx(:,:,end)), unique(sMtx(:,1,:)), ...
-    unique(sMtx(:,end,:)), unique(sMtx(1,:,:)), unique(sMtx(end,:,:))];
+bSyn = [unique(sMtx(:,:,1)); unique(sMtx(:,:,end)); unique(sMtx(:,1,:)); ...
+    unique(sMtx(:,end,:)); unique(sMtx(1,:,:)); unique(sMtx(end,:,:))];
 
 bSyn = unique(bSyn);
-
+bSyn(bSyn == 0) = [];
 uid = unique(sMtx); %all IDs
+uid(uid == 0) = [];
+
 
 % remove unique IDs that are on borders
 uid(ismember(uid,bSyn)) = [];
 
 rp = regionprops(sMtx,'PixelIdxList','Area');
-edgeList = double(zeros(length(rp),5));
+%edgeList = double(zeros(length(rp),5));
 
 q = OCPQuery;
 q.setType(eOCPQueryType.RAMONMetaOnly);
 
-for i = 1:uid %uid%length(rp) TODO: can clean this up to be more efficient
+for i = 1:length(uid) %uid%length(rp) TODO: can clean this up to be more efficient
     if rp(uid(i)).Area > 0
         q.setId(uid(i));
         ss = ocpS.query(q);
-        if length(cell2mat(ss{i}.segments.keys)) == 0 % not yet processed
+        if length(cell2mat(ss.segments.keys)) == 0 % not yet processed
         % Find overlaps x2
         sId = nMtxCube.data(rp(uid(i)).PixelIdxList);
         sId(sId == 0) = [];
