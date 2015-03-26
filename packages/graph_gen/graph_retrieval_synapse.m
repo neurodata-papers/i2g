@@ -1,7 +1,7 @@
 function edgeList = graph_retrieval_synapse(synToken, synServer, attrEdgeFile, graphFile)
 % This builds a segment graphs
 
-
+edgeList = [];
 oo = OCP('semaphore');
 oo.setServerLocation(synServer);
 oo.setAnnoToken(synToken);
@@ -26,7 +26,6 @@ errCount = 0;
 for i = 1:length(synAll)
     
     % Get all segments for this synapse 
-    synAll
     z = cell2mat(synAll{i}.segments.keys);
     
     if length(z) == 2
