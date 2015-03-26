@@ -46,7 +46,7 @@ for i = 1:length(synAll)
 end
 
 % Make LG and NG
-[neuGraph, nId, synGraph, synId] = graphMatrix(edgeList, varargin); %#ok<ASGLU>
+[neuGraph, nId, synGraph, synId] = graphMatrix(edgeList); %#ok<ASGLU>
 save(graphFile, 'neuGraph','nId','synGraph','synId','edgeList')
 attredgeWriter(edgeList, attrEdgeFile);
 skipCount
