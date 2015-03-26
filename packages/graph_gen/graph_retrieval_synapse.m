@@ -25,14 +25,14 @@ errCount = 0;
 
 for i = 1:length(synAll)
     
-    % Get all segments for this synapse 
+    % Get all segments for this synapse
     z = cell2mat(synAll{i}.segments.keys);
     
     if length(z) == 2
         %two segments found, add to edge list
-    
-    edgeList(c,:) = [min(z), max(z), id(i), 0]; % direction still unknown
-    
+        
+        edgeList(c,:) = [min(z), max(z), id(i), 0]; % direction still unknown
+        c = c + 1;
     elseif isempty(z)
         %no segments found, skip synapse
         disp('Skipping Synapse')
@@ -48,7 +48,10 @@ end
 % Make LG and NG
 [neuGraph, nId, synGraph, synId] = graphMatrix(edgeList); %#ok<ASGLU>
 save(graphFile, 'neuGraph','nId','synGraph','synId','edgeList')
-attredgeWriter(edgeList, attrEdgeFile);
+
+if size(edgeList,1) > 0
+    attredgeWriter(edgeList, attrEdgeFile);
+end
+
 skipCount
 errCount
-    
