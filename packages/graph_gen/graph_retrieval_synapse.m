@@ -15,7 +15,9 @@ id = oo.query(q); %do all in one chunk for simplicity
 
 q = OCPQuery;
 q.setType(eOCPQueryType.RAMONMetaOnly);
-synAll = q.setId(id);
+q.setId(id);
+
+synAll = oo.query(q);
 
 c = 1;
 skipCount = 0;
