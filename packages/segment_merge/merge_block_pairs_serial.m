@@ -288,7 +288,15 @@ function merge_block_pairs_serial(cutoutFile, annoToken, overlap_threshold, dist
         for ii = 1:length(id_list)
             ids = id_list{ii};
             mon.update('tc_ids', sprintf('%d,',ids));
+%            try
             oo.mergeAnnotation(ids(1),ids(2:end));
+            mon.update('serial_merge', sprintf('Successfully Merged IDs...'));
+
+ %           catch
+  %            mon.update('serial_merge', sprintf('Error in Merging IDs, Skipping...'));
+   
+  %          end
+            
         end
         fprintf('done.\n');
         mon.update('serial_merge', sprintf('Query Index %d Complete',jj));
