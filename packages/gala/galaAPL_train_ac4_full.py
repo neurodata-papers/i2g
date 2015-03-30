@@ -13,9 +13,9 @@ from gala import evaluate
 
 start = time.time()
 # read in OCP training data
-inFileImage = '/mnt/pipeline/tools/i2g/packages/gala/em_ac4short.mat'
-inFileMembrane = '/mnt/pipeline/tools/i2g/packages/gala/membrane_ac4short.mat'
-inFileTruth = '/mnt/pipeline/tools/i2g/packages/gala/labels_ac4short.mat'
+inFileImage = '/mnt/pipeline/tools/i2g/packages/gala/em_ac4.mat'
+inFileMembrane = '/mnt/pipeline/tools/i2g/packages/gala/membrane_ac4.mat'
+inFileTruth = '/mnt/pipeline/tools/i2g/packages/gala/labels_ac4.mat'
 
 im = scipy.io.loadmat(inFileImage)['im']
 im = im.astype('int32')
@@ -65,9 +65,9 @@ ari_ws_train = ev.adj_rand_index(ws_train, gt_train)
 print vi_ws_train
 print ari_ws_train
 
-scipy.io.savemat('/mnt/pipeline/tools/CAJAL3D/packages/gala/isbi_rfr2015_full/train_watershed.mat', mdict={'ws_train':ws_train})
-scipy.io.savemat('/mnt/pipeline/tools/CAJAL3D/packages/gala/isbi_rfr2015_full/membraneTrain.mat', mdict={'membraneTrain':membraneTrain})
-scipy.io.savemat('/mnt/pipeline/tools/CAJAL3D/packages/gala/isbi_rfr2015_full/gtTrain.mat', mdict={'gt_train':gt_train})
+#scipy.io.savemat('/mnt/pipeline/tools/CAJAL3D/packages/gala/isbi_rfr2015_full/train_watershed.mat', mdict={'ws_train':ws_train})
+#scipy.io.savemat('/mnt/pipeline/tools/CAJAL3D/packages/gala/isbi_rfr2015_full/membraneTrain.mat', mdict={'membraneTrain':membraneTrain})
+#scipy.io.savemat('/mnt/pipeline/tools/CAJAL3D/packages/gala/isbi_rfr2015_full/gtTrain.mat', mdict={'gt_train':gt_train})
 ###############################
 ## New stuff
 ###############################
@@ -89,4 +89,4 @@ print "Training classifier..."
 rf = classify.DefaultRandomForest().fit(X, y)
 # a policy is the composition of a feature map and a classifier
 learned_policy = agglo.classifier_probability(fc, rf)
-classify.save_classifier(rf,'/mnt/pipeline/tools/i2g/packages/gala/ac4_short_classifier.rf')
+classify.save_classifier(rf,'/mnt/pipeline/tools/i2g/packages/gala/ac4_full_classifier.rf')
