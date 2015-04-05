@@ -13,10 +13,10 @@ from gala import evaluate
 
 start = time.time()
 # read in OCP training data
-inFileImage = '/mnt/pipeline/tools/i2g/packages/gala/em_ac4short.mat'
-inFileMembrane = '/mnt/pipeline/tools/i2g/packages/gala/membrane_ac4short.mat'
-inFileTruth = '/mnt/pipeline/tools/i2g/packages/gala/labels_ac4short.mat'
-inFileWatershed = '/mnt/pipeline/tools/i2g/packages/gala/ws_ac4short.mat'
+inFileImage = '/mnt/pipeline/tools/i2g/packages/gala/em_ac4medium.mat'
+inFileMembrane = '/mnt/pipeline/tools/i2g/packages/gala/membrane_ac4medium.mat'
+inFileTruth = '/mnt/pipeline/tools/i2g/packages/gala/labels_ac4medium.mat'
+inFileWatershed = '/mnt/pipeline/tools/i2g/packages/gala/ws_ac4medium.mat'
 
 im = scipy.io.loadmat(inFileImage)['im']
 im = im.astype('int32')
@@ -46,4 +46,4 @@ print "Training classifier..."
 rf = classify.DefaultRandomForest().fit(X, y)
 # a policy is the composition of a feature map and a classifier
 learned_policy = agglo.classifier_probability(fc, rf)
-classify.save_classifier(rf,'/mnt/pipeline/tools/i2g/packages/gala/ac4_full_classifier_v2_short.rf')
+classify.save_classifier(rf,'/mnt/pipeline/tools/i2g/packages/gala/ac4_full_classifier_v2_medium.rf')

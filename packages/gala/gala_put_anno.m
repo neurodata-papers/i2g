@@ -1,4 +1,4 @@
-function rhoana_put_anno(imgToken, annoToken, annoServiceLocation, annoMat, emCube, author, query_file, padX, padY, useSemaphore, labelOutFile, tokenFile)
+function gala_put_anno(imgToken, annoToken, annoServiceLocation, annoMat, emCube, author, query_file, padX, padY, useSemaphore, labelOutFile, tokenFile)
 % rhoana_put_anno - this function writes rhoana results to OCP
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,7 +41,7 @@ disp(annoMat)
 disp(emCube)
 load(annoMat); % file has matrix labels
 load(emCube); % load em cube for position info
-
+labels = permute(labels, [2,3,1]);
 % Load Query
 load(query_file);
 

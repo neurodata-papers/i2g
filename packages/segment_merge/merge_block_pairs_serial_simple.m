@@ -125,7 +125,7 @@ for jj = start_index:stop_index
     
     
     %% Simple Algorithm for block merging
-    
+    id_list = [];
     % Simply look for high dice overlap between A and B.
     % Assuming high values (>0.5), should only need to check A to B
     % Also, if strictly pairwise, no TC
@@ -143,201 +143,56 @@ for jj = start_index:stop_index
             bPix = B(rpA(mm).PixelIdxList);
             bPix(bPix == 0) = [];
             possTarget = mode(bPix);
-            iCount = sum(bPix(:) == modeVal);
+            iCount = sum(bPix(:) == possTarget);
             
-            diceCoeff = (2 * iCount) / (rpA(mm).Area + rpB(modeVal).Area);
-            
-            if (diceCoeff >= overlap_threshold) && (mm ~= possTarget)
-                % looks good! Merge it yo.
-                id_list{c} = [min(mm, possTarget), max(mm,possTarget)];
-                c = c + 1;
+            if possTarget > 0
+                diceCoeff = (2 * iCount) / (rpA(mm).Area + rpB(possTarget).Area);
+                
+                if (diceCoeff >= overlap_threshold) && (mm ~= possTarget)
+                    % looks good! Merge it yo.
+                    id_list{c} = [min(mm, possTarget), max(mm,possTarget)];
+                    c = c + 1;
+                end
             end
-        end     
+        end
     end
-% looks good! Merge it yo.
-%                         mergeTo = B_ids(ii);
-%                         mergeFrom = A_overlap_ids(overlap_order(1:kk));
-%                         id_list_B{ii} = [mergeTo, mergeFrom'];
-
-
-
-%         %% Go from A to B
-%         % Get all IDs in A
-%         A_ids = unique(A);
-%         A_ids(A_ids == 0) = [];
-%
-%         % Allocate output
-%         id_list_A = cell(length(A_ids),1);
-%
-%         % Loop for every ID in A
-%         for ii = 1:length(A_ids)
-%             if mod(ii,100) == 0
-%                 fprintf('A-to-B: Checking ID %d of %d\n',ii,length(A_ids));
-%             end
-%             % Get overlap IDs
-%             B_overlap_ids = B(A == A_ids(ii));
-%             B_overlap_ids(B_overlap_ids == 0) = [];
-%
-%             % Get the overlap IDs and counts
-%             B_overlap_counts = histc(B_overlap_ids(:),unique(B_overlap_ids));
-%             B_overlap_ids = unique(B_overlap_ids);
-%             [~,overlap_order] = sort(B_overlap_counts,'descend');
-%
-%             % Loop through all overlap IDs trying to get a good match.
-%             % Start with the max overlap object and grow from there
-%             XX = zeros(size(A));
-%             XX(A == A_ids(ii)) = 1;
-%             XX_bb = regionprops(XX,'BoundingBox');
-%
-%             YY = zeros(size(B));
-%             for kk = 1:length(overlap_order)
-%                 % Set B ID you are checking to 1 (agglomerating)
-%                 YY(B == B_overlap_ids(overlap_order(kk))) = 1;
-%
-%                 % Compute cross-correlation
-%                 YY_bb = regionprops(YY,'BoundingBox');
-%                 x_min = round(min(XX_bb.BoundingBox(1),YY_bb.BoundingBox(1)));
-%                 x_max = x_min + round(max(XX_bb.BoundingBox(3),YY_bb.BoundingBox(3)));
-%                 y_min = round(min(XX_bb.BoundingBox(2),YY_bb.BoundingBox(2)));
-%                 y_max = y_min + round(max(XX_bb.BoundingBox(4),YY_bb.BoundingBox(4)));
-%                 if x_max > size(XX,2)
-%                     x_max = size(XX,2);
-%                 end
-%                 if y_max > size(XX,1)
-%                     y_max = size(XX,1);
-%                 end
-%                 if all(all(XX(y_min:y_max,x_min:x_max),1)) && all(all(YY(y_min:y_max,x_min:x_max),1))
-%                     % Both are completely the same!
-%                     score = 1;
-%                     peak_dist = 0;
-%                 else
-%                     % Use norm cross corr as a metric for similiarity
-%                     c = normxcorr2(XX(y_min:y_max,x_min:x_max),YY(y_min:y_max,x_min:x_max));
-%                     score = max(c(:));
-%
-%                     [ypeak, xpeak] = find(c==max(c(:)));
-%                     yoffSet = ypeak-size(XX(y_min:y_max,x_min:x_max),1);
-%                     xoffSet = xpeak-size(XX(y_min:y_max,x_min:x_max),2);
-%                     peak_dist = sqrt(mean(yoffSet)^2 + mean(xoffSet)^2);
-%                 end
-%
-%                 % Check if match is good enough and not too far away.
-%                 if score >= overlap_threshold
-%                     if peak_dist <= dist_threshold
-%                         % looks good! Merge it yo.
-%                         mergeTo = A_ids(ii);
-%                         mergeFrom = B_overlap_ids(overlap_order(1:kk));
-%                         id_list_A{ii} = [mergeTo, mergeFrom'];
-%
-%                         % Remove the object in A and B from consideration
-%                         A(A==mergeTo) = 0;
-%                         for gg = 1:length(mergeFrom)
-%                             B(B==mergeFrom(gg)) = 0;
-%                         end
-%                         break;
-%                     end
-%                 end
-%             end % Overlap loop
-%         end % A loop
-%
-%         %% Check if anything is left from B to A
-%
-%         % Get all IDs in B
-%         B_ids = unique(B);
-%         B_ids(B_ids == 0) = [];
-%
-%         % Allocate output
-%         id_list_B = cell(length(B_ids),1);
-%
-%         % Loop for every ID in A
-%         for ii = 1:length(B_ids)
-%             if mod(ii,100) == 0
-%                 fprintf('B-to-A: Checking ID %d of %d\n',ii,length(A_ids));
-%             end
-%             % Get overlap IDs
-%             A_overlap_ids = A(B == B_ids(ii));
-%             A_overlap_ids(A_overlap_ids == 0) = [];
-%
-%             % Get the overlap IDs and counts
-%             A_overlap_counts = histc(A_overlap_ids(:),unique(A_overlap_ids));
-%             A_overlap_ids = unique(A_overlap_ids);
-%             [~,overlap_order] = sort(A_overlap_counts,'descend');
-%
-%             % Loop through all overlap IDs trying to get a good match.
-%             % Start with the max overlap object and grow from there
-%             XX = zeros(size(B));
-%             XX(B == B_ids(ii)) = 1;
-%             XX_bb = regionprops(XX,'BoundingBox');
-%
-%             YY = zeros(size(A));
-%             for kk = 1:length(overlap_order)
-%                 % Set B ID you are checking to 1 (agglomerating)
-%                 YY(A == A_overlap_ids(overlap_order(kk))) = 1;
-%
-%                 % Compute cross-correlation
-%                 YY_bb = regionprops(YY,'BoundingBox');
-%                 x_min = round(min(XX_bb.BoundingBox(1),YY_bb.BoundingBox(1)));
-%                 x_max = x_min + round(max(XX_bb.BoundingBox(3),YY_bb.BoundingBox(3)));
-%                 y_min = round(min(XX_bb.BoundingBox(2),YY_bb.BoundingBox(2)));
-%                 y_max = y_min + round(max(XX_bb.BoundingBox(4),YY_bb.BoundingBox(4)));
-%                 if x_max > size(XX,2)
-%                     x_max = size(XX,2);
-%                 end
-%                 if y_max > size(XX,1)
-%                     y_max = size(XX,1);
-%                 end
-%                 c = normxcorr2(XX(y_min:y_max,x_min:x_max),YY(y_min:y_max,x_min:x_max));
-%                 score = max(c(:));
-%                 [ypeak, xpeak] = find(c==max(c(:)));
-%                 yoffSet = ypeak-size(XX(y_min:y_max,x_min:x_max),1);
-%                 xoffSet = xpeak-size(XX(y_min:y_max,x_min:x_max),2);
-%                 peak_dist = sqrt(mean(yoffSet)^2 + mean(xoffSet)^2);
-%
-%                 % Check if match is good enough and not too far away.
-%                 if score >= overlap_threshold
-%                     if peak_dist <= dist_threshold
-%                         % looks good! Merge it yo.
-%                         mergeTo = B_ids(ii);
-%                         mergeFrom = A_overlap_ids(overlap_order(1:kk));
-%                         id_list_B{ii} = [mergeTo, mergeFrom'];
-%
-%                         % Remove the object in A and B from consideration
-%                         B(B==mergeTo) = 0;
-%                         for gg = 1:length(mergeFrom)
-%                             A(A==mergeFrom(gg)) = 0;
-%                         end
-%                         break;
-%                     end
-%                 end
-%             end % Overlap loop
-%         end % B loop
-
-
-%% Merge and clean up lists
-id_list(cellfun(@isempty,id_list)) = [];
-
-%% Transitive Closure
-% Not required here
-%id_list = m.transitive_closure(id_list);
-
-%% Run merges
-mon.update('serial_merge_simple', sprintf('Requesting %d Merges',length(id_list)));
-for ii = 1:length(id_list)
-    ids = id_list{ii};
-    mon.update('tc_ids', sprintf('%d,',ids));
-    %            try
-    oo.mergeAnnotation(ids(1),ids(2:end));
-    mon.update('serial_merge_simple', sprintf('Successfully Merged IDs...'));
     
-    %           catch
-    %            mon.update('serial_merge_simple', sprintf('Error in Merging IDs, Skipping...'));
+    if ~isempty(id_list) 
+    %% Merge and clean up lists
+    id_list(cellfun(@isempty,id_list)) = [];
     
-    %          end
+    %% Transitive Closure
+    % Not required here
+    %id_list = m.transitive_closure(id_list);
     
-end
-fprintf('done.\n');
-mon.update('serial_merge_simple', sprintf('Query Index %d Complete',jj));
+    %% Run merges
+    mon.update('serial_merge_simple', sprintf('Requesting %d Merges',length(id_list)));
+    for ii = 1:length(id_list)
+        ids = id_list{ii};
+        mon.update('tc_ids', sprintf('%d,',ids));
+        
+        cc = 0;
+        while cc < 5
+            try
+                oo.mergeAnnotation(ids(1),ids(2:end));
+                mon.update('serial_merge_simple', sprintf('Successfully Merged IDs...'));
+            catch
+                cc = cc + 1;
+            end
+        end
+        
+        %            mon.update('serial_merge_simple', sprintf('Error in Merging IDs, Skipping...'));
+        
+        %          end
+        
+    end
+    fprintf('done.\n');
+    mon.update('serial_merge_simple', sprintf('Query Index %d Complete',jj));
+    else
+          mon.update('serial_merge_simple', sprintf('Requesting %d Merges',0));
+          mon.update('serial_merge_simple', sprintf('Query Index %d Complete',jj));
 
-end
+    end
+
 end
 
