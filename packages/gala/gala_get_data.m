@@ -1,6 +1,7 @@
 function gala_get_data(emToken,  emServiceLocation, membraneToken, membraneServiceLocation,...
-    queryFile, emCube, emMat, membraneMat, dilXY, dilZ, useSemaphore)
-% rhoana_get_data - this function pulls data for rhoana and saves it to
+    queryFile, emCube, emMat, membraneMat, wsMtx, dilXY, dilZ, wsThresh, useSemaphore)
+
+% gala_get_data - this function pulls data for rhoana and saves it to
 % mat files.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -18,7 +19,6 @@ function gala_get_data(emToken,  emServiceLocation, membraneToken, membraneServi
 % See the License for the specific language governing permissions and
 % limitations under the License.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 %% Setup OCP
 if useSemaphore == 1
@@ -46,44 +46,25 @@ membrane_data = oo.query(query);
 
 %% Do dilation and median filter here, for consistency across apps
 
-membrane = membrane_data.data; %#ok<NASGU>
+membrane = single(membrane_data.data); 
 
-% THIS IS ONLY FOR V18
-%mm = membrane;
-%mm(membrane < 0.1) = NaN;
-%J = single(histeq(uint8(mm(:)*255)))/255;
-%J = reshape(J,size(membrane));
-%J(membrane < 0.1) = 0;
+ws_raw = segmentWatershed2D(membrane_data,dilXY,dilZ,wsThresh);
+membrane = permute(membrane, [3,1,2]);
+im = permute(em_cube.data, [3,1,2]);
+ws = permute(ws_raw.data,[3,1,2]);
 
-% Preprocessing option 2 - TODO
-% J = membrane;
-% membrane = 8.36495467709*J.^3 -13.4234046429*J.^2 + 5.32800199723.*J;
-% membrane(membrane < 0) = 0;
-% clear J 
-% 
-% for i = 1:size(membrane,3)
-%     membrane(:,:,i) = medfilt2(membrane(:,:,i),[11,11]);
-% end
-% 
-% % This is a way to mask out isolated membrane pixels
-% if dilXY ~= 0
-%     membrane = imdilate(membrane,strel('ball',dilXY, dilZ));
-% else
-%     disp('skipping dilation...')
-% end
-% 
-% membrane = (membrane-min(membrane(:)))/max(membrane(:)-min(membrane(:)));
+
 
 %% Save Output Data
-% Save EM RAMON Volume
-save(emCube,'em_cube');
 
 % Save EM Matrix
-im = em_cube.data; %#ok<NASGU>
 save(emMat,'im');
 
+save(emCube,'em_cube');
+
+save(wsMtx,'ws');
+
 % Save Membrane Matrix
-%membrane = membrane_data.data; %#ok<NASGU>
 save(membraneMat,'membrane');
 
 
