@@ -137,6 +137,7 @@ for jj = start_index:stop_index
     rpB = regionprops(B,'PixelIdxList','Area');
     c = 1;
     
+    %% A to B
     for mm = 1:length(rpA)
         if rpA(mm).Area > 0
             
@@ -147,6 +148,30 @@ for jj = start_index:stop_index
             
             if possTarget > 0
                 diceCoeff = (2 * iCount) / (rpA(mm).Area + rpB(possTarget).Area);
+                
+                if (diceCoeff >= overlap_threshold) && (mm ~= possTarget)
+                    % looks good! Merge it yo.
+                    id_list{c} = [min(mm, possTarget), max(mm,possTarget)];
+                    rpB(possTarget).Area = -1; %Used this ID!
+                    c = c + 1;
+                end
+            end
+        end
+    end
+    
+   %% B to A
+   % Going the other direction is especially important for branching
+    
+    for mm = 1:length(rpB)
+        if rpB(mm).Area > 0
+            
+            aPix = A(rpB(mm).PixelIdxList);
+            aPix(aPix == 0) = [];
+            possTarget = mode(aPix);
+            iCount = sum(aPix(:) == possTarget);
+            
+            if possTarget > 0
+                diceCoeff = (2 * iCount) / (rpB(mm).Area + rpA(possTarget).Area);
                 
                 if (diceCoeff >= overlap_threshold) && (mm ~= possTarget)
                     % looks good! Merge it yo.

@@ -66,3 +66,21 @@ save('em_ac4short.mat','im');
 save('membrane_ac4short.mat','membrane');
 save('labels_ac4short.mat','truth');
 save('ws_ac4short.mat','ws');
+
+
+%% 3D watershed option
+
+dilXY = 11;
+dilZ = 5;
+thresh = 10;
+
+ws_raw = segmentWatershed(mData,dilXY,dilZ,thresh);
+
+ws = permute(ws_raw.data,[3,1,2]);
+save('ws_ac4_3D.mat','ws');
+
+ws = ws(1:50,:,:);
+save('ws_ac4medium_3D.mat','ws');
+
+ws = ws(1:10,:,:);
+save('ws_ac4short_3D.mat','ws');

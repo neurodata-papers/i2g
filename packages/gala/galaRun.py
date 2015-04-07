@@ -36,7 +36,7 @@ algo = sys.argv[5]
 
 # Cast to correct types
 thresh = float(thresh)
-algo = int(algo)
+algo = int(float(algo))
 mat_contents = scipy.io.loadmat(inFileImage)
 im = mat_contents['im']
 

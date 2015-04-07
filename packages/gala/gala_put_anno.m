@@ -131,6 +131,7 @@ size(labels)
 ids = unique(labels);
 ids(ids == 0) = [];
 num_objs = length(ids)
+whos labels
 
 if use_new_method == true
     % Block reserve IDs
@@ -160,12 +161,18 @@ if use_new_method == true
     fprintf('Batch Metadata Upload: ');
     toc
 else
+    % relabel Paint
+    fprintf('Relabling: ');
+    labels = uint32(labels); %TODO - careful casting in this way - possible loss of precision
+    
+    [zz, n] = relabel_id(labels);
+    
     % Old method
     % Create empty RAMON Objects
     seg = RAMONSegment();
     seg.setAuthor(author);
-    seg_cell = cell(num_objs,1);
-    for ii = 1:num_objs
+    seg_cell = cell(n,1);
+    for ii = 1:n
         s = seg.clone();
         seg_cell{ii} = s;
     end
@@ -176,18 +183,17 @@ else
     ids = oo.createAnnotation(seg_cell);
     fprintf('Batch Metadata Upload: ');
     toc
+
+    labelOut = zeros(size(zz));
     
-    % relabel Paint
-    tic
-    labelOut = zeros(size(labels));
-    old_ids = unique(labels);
-    old_ids(old_ids == 0) = [];
-    for ii = 1:length(old_ids)
-        labelOut(labels == old_ids(ii)) = ids(ii);
+    rp = regionprops(zz,'PixelIdxList');
+    for ii = 1:length(rp)
+        labelOut(rp(ii).PixelIdxList) = ids(ii);
     end
-    fprintf('Relabling: ');
-    toc
     
+    clear zz
+    toc
+
 end
 
 % Block write paint
