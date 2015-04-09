@@ -93,9 +93,11 @@ for i = 1:length(uid) %uid%length(rp) TODO: can clean this up to be more efficie
         direction = 0;
         synDatabaseId = double(uid(i));     
         
+        if sp1 > 0 & sp2 > 0
         ss.addSegment(sp1,eRAMONFlowDirection.unknown)
         ss.addSegment(sp2,eRAMONFlowDirection.unknown)
         ocpS.updateAnnotation(ss);
+        end
     end
     end
 end

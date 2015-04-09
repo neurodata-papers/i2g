@@ -8,3 +8,5 @@ token*
 *.py~
 
 *.py~
+
+*.mat
