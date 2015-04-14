@@ -69,6 +69,7 @@ if algo == 1: #run gala
     print 'choosing best operating point...'
     g_test.agglomerate(thresh) # best expected segmentation
     labels = g_test.get_segmentation()
+    labels, _, _ = evaluate.relabel_from_one(labels)
     print "Completed Gala Run"
 
 
@@ -81,6 +82,8 @@ if algo == 2: #mean agglomeration
     g_testm = agglo.Rag(ws, membrane, merge_priority_function=agglo.boundary_mean)
     g_testm.agglomerate(thresh)
     labels = g_testm.get_segmentation()
+    labels, _, _ = evaluate.relabel_from_one(labels)
+
     print "Completed Mean Agglo"
 
 fileOut = open(outputFile, "w")

@@ -146,21 +146,22 @@ for jj = start_index:stop_index
             possTarget = mode(bPix);
             iCount = sum(bPix(:) == possTarget);
             
-            if possTarget > 0
+            if possTarget > 0 && rpB(possTarget).Area > 0
                 diceCoeff = (2 * iCount) / (rpA(mm).Area + rpB(possTarget).Area);
                 
                 if (diceCoeff >= overlap_threshold) && (mm ~= possTarget)
                     % looks good! Merge it yo.
                     id_list{c} = [min(mm, possTarget), max(mm,possTarget)];
                     rpB(possTarget).Area = -1; %Used this ID!
+                    rpA(mm).Area = -1; %Used this ID
                     c = c + 1;
                 end
             end
         end
     end
     
-   %% B to A
-   % Going the other direction is especially important for branching
+    %% B to A
+    % Going the other direction is especially important for branching
     
     for mm = 1:length(rpB)
         if rpB(mm).Area > 0
@@ -170,54 +171,53 @@ for jj = start_index:stop_index
             possTarget = mode(aPix);
             iCount = sum(aPix(:) == possTarget);
             
-            if possTarget > 0
+            if possTarget > 0 && rpA(possTarget).Area > 0
                 diceCoeff = (2 * iCount) / (rpB(mm).Area + rpA(possTarget).Area);
                 
                 if (diceCoeff >= overlap_threshold) && (mm ~= possTarget)
                     % looks good! Merge it yo.
                     id_list{c} = [min(mm, possTarget), max(mm,possTarget)];
+                    rpA(possTarget).Area = -1; %Used this ID!
+                    rpB(mm).Area = -1; %Used this ID
+                    
                     c = c + 1;
                 end
             end
         end
     end
     
-    if ~isempty(id_list) 
-    %% Merge and clean up lists
-    id_list(cellfun(@isempty,id_list)) = [];
-    
-    %% Transitive Closure
-    % Not required here
-    %id_list = m.transitive_closure(id_list);
-    
-    %% Run merges
-    mon.update('serial_merge_simple', sprintf('Requesting %d Merges',length(id_list)));
-    for ii = 1:length(id_list)
-        ids = id_list{ii};
-        mon.update('tc_ids', sprintf('%d,',ids));
+    if ~isempty(id_list)
+        %% Merge and clean up lists
+        id_list(cellfun(@isempty,id_list)) = [];
         
-        cc = 0;
-        while cc < 5
+        %% Transitive Closure
+        % Not required here
+        %id_list = m.transitive_closure(id_list);
+        
+        %% Run merges
+        mon.update('serial_merge_simple', sprintf('Requesting %d Merges',length(id_list)));
+        for ii = 1:length(id_list)
+            ids = id_list{ii};
+            mon.update('tc_ids', sprintf('%d,',ids));
+            
+            cc = 0;
+            dd = 0;
             try
                 oo.mergeAnnotation(ids(1),ids(2:end));
                 mon.update('serial_merge_simple', sprintf('Successfully Merged IDs...'));
             catch
+                mon.update('serial_merge_simple', sprintf('Error in Merging IDs...'));
                 cc = cc + 1;
             end
         end
-        
-        %            mon.update('serial_merge_simple', sprintf('Error in Merging IDs, Skipping...'));
-        
-        %          end
-        
-    end
-    fprintf('done.\n');
-    mon.update('serial_merge_simple', sprintf('Query Index %d Complete',jj));
+        fprintf('done.\n');
+        mon.update('serial_merge_simple', sprintf('Query Index %d Complete',jj));
     else
-          mon.update('serial_merge_simple', sprintf('Requesting %d Merges',0));
-          mon.update('serial_merge_simple', sprintf('Query Index %d Complete',jj));
-
+        mon.update('serial_merge_simple', sprintf('Requesting %d Merges',0));
+        mon.update('serial_merge_simple', sprintf('Query Index %d Complete',jj));
+        
     end
-
+    
 end
 
+cc

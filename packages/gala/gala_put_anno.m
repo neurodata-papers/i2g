@@ -36,7 +36,7 @@ oo.setServerLocation(annoServiceLocation);
 oo.setImageToken(imgToken);
 oo.setAnnoToken(annoToken);
 
-%% Load rhoana results
+%% Load gala results
 disp(annoMat)
 disp(emCube)
 load(annoMat); % file has matrix labels
@@ -167,7 +167,6 @@ else
     
     [zz, n] = relabel_id(labels);
     
-    % Old method
     % Create empty RAMON Objects
     seg = RAMONSegment();
     seg.setAuthor(author);

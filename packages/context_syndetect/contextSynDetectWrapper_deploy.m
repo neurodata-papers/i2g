@@ -1,10 +1,8 @@
-function contextSynDetectWrapper_integrated(imgServer, imgToken, vesicleServer, vesicleToken, membraneServer, membraneToken, ...
-    queryFile, intensity_bounds, classifier_file, uploadToken, uploadServer, upload_author, ...
-    threshold, minSize2D, maxSize2D, minSize3D, doEdgeCrop, padX, padY, padZ, useSemaphore)
-
+function contextSynDetectWrapper_deploy(imgServer, imgToken, vesicleServer, vesicleToken, membraneServer, membraneToken, annoServer, annoToken, ...
+    queryFile, intensity_bounds, classifier_file, upload_author, threshold, minSize2D, maxSize2D, minSize3D, padX, padY, padZ, useSemaphore)
 % contextSynDetectWrapper - this function addes OCP annotation
 % database upload to the detector
-%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % (c) [2014] The Johns Hopkins University / Applied Physics Laboratory All Rights Reserved. Contact the JHU/APL Office of Technology Transfer for any additional rights.  www.jhuapl.edu/ott
 % 
@@ -53,18 +51,17 @@ load(queryFile);
 query.setType(eOCPQueryType.annoDense);
 vesicles = oo.query(query);
 
-%% Download EM Data
-oo.setServerLocation(imgServer);
-oo.setImageToken(imgToken);
-query.setType(eOCPQueryType.imageDense);
-cube = oo.query(query);
-
-
 %% Download Membrane Cube
 oo.setServerLocation(membraneServer);
 oo.setAnnoToken(membraneToken);
 query.setType(eOCPQueryType.probDense);
 membraneCube = oo.query(query);
+
+%% Download EM Data
+oo.setServerLocation(imgServer);
+oo.setImageToken(imgToken);
+query.setType(eOCPQueryType.imageDense);
+cube = oo.query(query);
 
 %% Run Detector
 [~,~,data,~,~,~] = contextSynDetect_v6(cube, intensity_bounds, classifier_file, vesicles, membraneCube);
@@ -245,16 +242,91 @@ else
     xyzOffset = [query.xRange(1),query.yRange(1),query.zRange(1)];
 end
 
+
+
 oo.setServerLocation(annoServer);
 oo.setAnnoToken(annoToken);
 
-sProb = RAMONVolume;
-sProb.setCutout(data(ystart:yend,xstart:xend,zstart:zend));
-sProb.setXyzOffset(xyzOffset);
-sProb.setResolution(membraneCube.resolution);
+% Create RAMONVolume for block upload
+prob = RAMONVolume();
+prob.setCutout(data(ystart:yend,xstart:xend,zstart:zend));
+prob.setResolution(query.resolution);
+prob.setXyzOffset(xyzOffset);
+prob.setDataType(eRAMONDataType.prob32);
 
-contextSynDetectRAMONify_integrated(uploadToken, uploadServer, upload_author,sProb,...
-    threshold, minSize2D, maxSize2D, minSize3D, doEdgeCrop,useSemaphore, errorPage);
+%% Hardcoded here
+
+temp_prob = prob.data;
+
+% POST PROCESSING
+% threshold prob
+temp_prob(temp_prob >= threshold) = 1;
+temp_prob(temp_prob < 1) = 0;
+
+% Check 2D size limits first
+cc = bwconncomp(temp_prob,4);
+
+%Apply object size filter
+for jj = 1:cc.NumObjects
+    if length(cc.PixelIdxList{jj}) < minSize2D || length(cc.PixelIdxList{jj}) > maxSize2D
+        temp_prob(cc.PixelIdxList{jj}) = 0;
+    end
+end
+
+% get size of each region in 3D
+cc = bwconncomp(temp_prob,6);
+
+% check 3D size limits and edge hits
+for ii = 1:cc.NumObjects
+    %to be small
+    if length(cc.PixelIdxList{ii}) < minSize3D
+        temp_prob(cc.PixelIdxList{ii}) = 0;
+    end
+end
+
+% re-run connected components
+cc = bwconncomp(temp_prob,18);
+
+fprintf('Number Synapses detected: %d\n',cc.NumObjects);
+
+%% Upload RAMON objects as voxel lists with preserve write option
+fprintf('Creating Synapse Objects...');
+synapses = cell(cc.NumObjects,1);
+for ii = 1:cc.NumObjects
+    
+    s = RAMONSynapse();
+    s.setResolution(prob.resolution);
+    s.setXyzOffset(prob.xyzOffset);
+    s.setDataType(eRAMONDataType.anno32);
+    s.setAuthor(upload_author);
+    
+    [r,c,z] = ind2sub(size(prob.data),cc.PixelIdxList{ii});
+    voxel_list = cat(2,c,r,z);
+    
+    s.setVoxelList(prob.local2Global(voxel_list));
+    
+    % Approximate absolute centroid
+    approxCentroid = prob.local2Global(round(mean(voxel_list,1)));
+    
+    %metadata - for convenience
+    s.addDynamicMetadata('approxCentroid', approxCentroid);
+    synapses{ii} = s;
+end
+fprintf('done.\n');
+
+if cc.NumObjects ~= 0
+    fprintf('Uploading %d synapses\n\n',length(synapses));
+    synapses
+    ids = oo.createAnnotation(synapses,eOCPConflictOption.preserve);
+    
+    for ii = 1:length(ids)
+        fprintf('Uploaded synapse id: %d\n',ids(ii));
+    end
+    
+    fprintf('Uploaded %d synapses\n\n',length(ids));
+else
+    fprintf('No Synapses Detected\n');
+end
 
 end
 
