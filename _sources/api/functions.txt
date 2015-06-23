@@ -1,7 +1,7 @@
-vesicle-rf Functions
+i2g Functions
 ********************
 
 
 
-vesicle-cnn Functions
+i2g Functions
 *********************
