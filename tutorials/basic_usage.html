@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Basic Usage &mdash; manno v1.0 documentation</title>
+  <title>Basic Usage &mdash; i2g v1.0 documentation</title>
   
 
   
@@ -32,8 +32,8 @@
   
 
   
-    <link rel="top" title="manno v1.0 documentation" href="../index.html"/>
-        <link rel="next" title="manno Functions" href="../api/functions.html"/>
+    <link rel="top" title="i2g v1.0 documentation" href="../index.html"/>
+        <link rel="next" title="Advanced Usage" href="advanced_usage.html"/>
         <link rel="prev" title="Frequently Asked Questions (FAQ)" href="../sphinx/faq.html"/> 
 
   
@@ -51,7 +51,7 @@
         
 
         
-          <a href="../index.html" class="icon icon-home"> manno
+          <a href="../index.html" class="icon icon-home"> i2g
         
 
         
@@ -77,7 +77,7 @@
           
           
               <p class="caption"><span class="caption-text">Documentation</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx/introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx/local_config.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx/ocp.html">OCP</a><ul>
@@ -87,23 +87,35 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../sphinx/faq.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Basic Usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#train-protocol">Train Protocol</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#deploy-protocol">Deploy Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#train">Train</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deploy">Deploy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage-notes">Usage Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#validation">Validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#advanced-topics-future-functionality">Advanced Topics/Future Functionality</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validation.html">Validation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Further Reading</span></p>
+<p class="caption"><span class="caption-text">Paper</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../api/functions.html">manno Functions</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://gitter.im/openconnectome/ocp-ilastik">Gitter chatroom</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://groups.google.com/forum/#!forum/ocp-support/">Mailing List</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/openconnectome/ocp-ilastik">Github repo</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/openconnectome/ocp-ilastik/releases/">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../paper/inputdata.html">Input Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../paper/inputdata.html#ac4">AC4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../paper/inputdata.html#ac3">AC3</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../paper/outputdata.html">Data Derivatives</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://gitter.im/openconnectome/i2g">  Gitter chatroom</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://groups.google.com/forum/#!forum/ocp-support/">  Mailing List</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/openconnectome/i2g">  Github repo</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/openconnectome/i2g/releases/">  Release Notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="  William Gray Roncal, Dean M. Kleissas, Joshua T. Vogelstein, Priya Manavalan, Kunal Lillaney, Michael Pekala, Randal Burns, R. Jacob Vogelstein, Carey E. Priebe, Mark A. Chevillet, Gregory D. Hager. An Automated Images-to-Graphs Framework for High Resolution Connectomics. In Review, 2015 `arXiv &lt;http://arxiv.org/abs/1411.6880&gt;`_">  William Gray Roncal, Dean M. Kleissas, Joshua T. Vogelstein, Priya Manavalan, Kunal Lillaney, Michael Pekala, Randal Burns, R. Jacob Vogelstein, Carey E. Priebe, Mark A. Chevillet, Gregory D. Hager. An Automated Images-to-Graphs Framework for High Resolution Connectomics. In Review, 2015 `arXiv &lt;http://arxiv.org/abs/1411.6880&gt;`_</a></li>
 </ul>
 
           
@@ -117,7 +129,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">manno</a>
+        <a href="../index.html">i2g</a>
       </nav>
 
 
@@ -143,89 +155,20 @@
             
   <div class="section" id="basic-usage">
 <h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="train-protocol">
-<h2>Train Protocol<a class="headerlink" href="#train-protocol" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Identify a region of interest in OCP, and note the data server, token, resolution, and coordinates</li>
-<li>Create a query, using the instructions for CAJAL</li>
-<li>Run <em>manno_getImage.m</em> to generate an image volume suitable for annotation in ITK Snap</li>
-<li>Annotate: Once the data has been formatted for ITK Snap, the user should open the ITK SNAP application and load in the NIFTI data saved during the data acquisition step. Then using the brush tool, annotate the data as desired. Users can choose to use separate colors for each annotation or rely on a connected component post-processing step to identify each object (best for sparse data)</li>
-<li>Save Segmentation Image: (ITK Snap Menu &gt; Segmentation &gt; Save Segmentation Image). Choose a name that you will be able to easily correlate to its appropriate volume image volume.</li>
-<li>Run <em>manno_putAnno.m</em>, specifying the server, token, annotation file, and query used to download the underlying image. Users may choose to run a simple connected component post-processing step to break each group of connected pixels (3D) into a separate ID. More complicated post-processing should be done outside of the tool, with the result uploaded using the ocp_upload_dense.m function (see CAJAL documentation).</li>
-</ul>
+<div class="section" id="train">
+<h2>Train<a class="headerlink" href="#train" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="deploy-protocol">
-<h2>Deploy Protocol<a class="headerlink" href="#deploy-protocol" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="deploy">
+<h2>Deploy<a class="headerlink" href="#deploy" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="usage-notes">
 <h2>Usage Notes<a class="headerlink" href="#usage-notes" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>OCP in Ilastik</li>
-<li>Functions of Ilastik are documented at Ilastik</li>
-<li>For more information on painting annotations, please follow the steps outlined <a class="reference external" href="http://www.itksnap.org/pmwiki/pmwiki.php?n=Documentation.TutorialSectionManualSegmentation">here</a>.</li>
-<li>Currently, only single channel 8-bit image data is supported</li>
-<li>ITK-Snap is compatible with a variety of input data formats; the most straightforward is NIFTI, a general purpose neuroimaging format. On laptops or smaller workstations, only a small portion of a slice/volume should be truthed at a time for memory reasons.</li>
-<li><em>run_manno_example.m</em> provides a minimal working example to use as a starting point.</li>
-</ul>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>The following code demonstrates the manno protocol.  A few mitochondria have been labeled as an example.  The example script should take approximately 10 seconds to complete.</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">run_manno_example</span><span class="p">()</span><span class="w"></span>
-<span class="c">% Mananno Example</span>
-<span class="c">% manno starter to demonstrate protocol functionality.  All required inputs</span>
-<span class="c">% are hardcoded for this demo.  Paths are hardcoded for Linux/Mac.</span>
-<span class="c">%</span>
-<span class="c">% The result of this run can be viewed in a webbrowser using the following</span>
-<span class="c">% URL: http://braingraph1dev.cs.jhu.edu/ocp/overlay/0.7/temp2/xy/1/5472,5972/8712,9212/1031/</span>
-<span class="c">%</span>
-<span class="c">% **Author**</span>
-<span class="c">%</span>
-<span class="c">% W. Gray Roncal</span>
-
-<span class="c">%% test_query</span>
-<span class="n">xstart</span> <span class="p">=</span> <span class="mi">5472</span><span class="p">;</span>
-<span class="n">xstop</span> <span class="p">=</span> <span class="n">xstart</span> <span class="o">+</span> <span class="mi">512</span><span class="p">;</span>
-<span class="n">ystart</span> <span class="p">=</span> <span class="mi">8712</span><span class="p">;</span>
-<span class="n">ystop</span> <span class="p">=</span> <span class="n">ystart</span> <span class="o">+</span> <span class="mi">512</span><span class="p">;</span>
-<span class="n">zstart</span> <span class="p">=</span> <span class="mi">1020</span><span class="p">;</span>
-<span class="n">zstop</span> <span class="p">=</span> <span class="n">zstart</span> <span class="o">+</span> <span class="mi">16</span><span class="p">;</span>
-
-<span class="n">resolution</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
-
-<span class="n">query</span> <span class="p">=</span> <span class="n">OCPQuery</span><span class="p">;</span>
-<span class="n">query</span><span class="p">.</span><span class="n">setType</span><span class="p">(</span><span class="n">eOCPQueryType</span><span class="p">.</span><span class="n">imageDense</span><span class="p">);</span>
-<span class="n">query</span><span class="p">.</span><span class="n">setCutoutArgs</span><span class="p">([</span><span class="n">xstart</span><span class="p">,</span> <span class="n">xstop</span><span class="p">],[</span><span class="n">ystart</span><span class="p">,</span><span class="n">ystop</span><span class="p">],[</span><span class="n">zstart</span><span class="p">,</span><span class="n">zstop</span><span class="p">],</span><span class="n">resolution</span><span class="p">);</span>
-
-<span class="c">%% Servers and tokens - alter appropriately</span>
-<span class="n">server</span> <span class="p">=</span> <span class="s">&#39;openconnecto.me&#39;</span><span class="p">;</span>
-<span class="n">token</span> <span class="p">=</span> <span class="s">&#39;kasthuri11cc&#39;</span><span class="p">;</span>
-
-<span class="n">serverUp</span> <span class="p">=</span> <span class="s">&#39;braingraph1dev.cs.jhu.edu&#39;</span><span class="p">;</span>
-<span class="n">tokenUp</span> <span class="p">=</span> <span class="s">&#39;temp2&#39;</span><span class="p">;</span>
-
-<span class="c">%% Run manno</span>
-<span class="n">manno_getImage</span><span class="p">(</span><span class="n">server</span><span class="p">,</span><span class="n">token</span><span class="p">,</span><span class="s">&#39;../data/queryFileTest&#39;</span><span class="p">,</span><span class="s">&#39;../data/testitk.nii&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-<span class="c">% Manual annotation step happens here</span>
-<span class="n">manno_putAnno</span><span class="p">(</span><span class="n">serverUp</span><span class="p">,</span><span class="n">tokenUp</span><span class="p">,</span><span class="s">&#39;../data/queryFileTest&#39;</span><span class="p">,</span><span class="s">&#39;../data/exampleAnno.nii.gz&#39;</span><span class="p">,</span><span class="s">&#39;RAMONOrganelle&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="validation">
-<h2>Validation<a class="headerlink" href="#validation" title="Permalink to this headline">¶</a></h2>
-<p>The result of the example script can be accessed using the following link:
-<a class="reference external" href="http://braingraph1dev.cs.jhu.edu/ocp/overlay/0.7/temp2/xy/1/5472,5972/8712,9212/1031/">http://braingraph1dev.cs.jhu.edu/ocp/overlay/0.7/temp2/xy/1/5472,5972/8712,9212/1031/</a></p>
-<p>Note that the server and token pair listed here are public and other data may be pre-existing.</p>
-<div class="figure">
-<img alt="tutorials/../images/manno_example_result.png" src="tutorials/../images/manno_example_result.png" />
-</div>
-</div>
-<div class="section" id="advanced-topics-future-functionality">
-<h2>Advanced Topics/Future Functionality<a class="headerlink" href="#advanced-topics-future-functionality" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>When uploading annotations processed as many small cubes, often some sort of padding or stitching operation is required.  These will differ slightly depending on use cases.  Examples exist (e.g., i2g, vesicle) to use as a starting point</li>
-<li>ilastik also supports object detection classifiers and manual labeling.  Our wrappers should work unchanged.  The only changes expected are with the users&#8217; ilastik application.  Please let us know if you would like us to develop these protocols.</li>
-</ul>
 </div>
 </div>
 
@@ -235,7 +178,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../api/functions.html" class="btn btn-neutral float-right" title="manno Functions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="advanced_usage.html" class="btn btn-neutral float-right" title="Advanced Usage" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../sphinx/faq.html" class="btn btn-neutral" title="Frequently Asked Questions (FAQ)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

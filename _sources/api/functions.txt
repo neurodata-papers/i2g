@@ -1,8 +1,7 @@
-manno Functions
-**********************
-
-.. automodule:: code
-   :members:
+vesicle-rf Functions
+********************
 
 
-*For questions on these functions, please contact Will Gray Roncal at wgr@jhu.edu*
+
+vesicle-cnn Functions
+*********************
