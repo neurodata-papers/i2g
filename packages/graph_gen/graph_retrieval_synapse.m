@@ -2,7 +2,7 @@ function edgeList = graph_retrieval_synapse(synToken, synServer, attrEdgeFile, g
 % This builds a segment graphs
 
 edgeList = [];
-oo = OCP('semaphore');
+oo = OCP();%TODO 'semaphore');
 oo.setServerLocation(synServer);
 oo.setAnnoToken(synToken);
 
